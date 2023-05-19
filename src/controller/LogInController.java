@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
@@ -26,8 +27,10 @@ public class LogInController implements Initializable {
 
     public void onResetButton(ActionEvent actionEvent) {
         System.out.println("Reset button clicked.");
-        usernameText.setText("");
-        passwordText.setText("");
+        usernameText.clear();
+        passwordText.clear();
+//        usernameText.setText("");
+//        passwordText.setText("");
     }
 
     public void onCancelButton(ActionEvent actionEvent) {
@@ -36,6 +39,9 @@ public class LogInController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ZoneId zone = ZoneId.systemDefault();
+        userTimeZoneLabel.setText(String.valueOf(zone));
+
 
     }
 }
