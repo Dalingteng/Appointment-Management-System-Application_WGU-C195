@@ -9,24 +9,24 @@ public class User {
     private LocalDateTime createDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
-    private String lastUpdateBy;
+    private String lastUpdatedBy;
 
     public User(int userId, String userName, String password, LocalDateTime createDate,
-                String createdBy, LocalDateTime lastUpdate, String lastUpdateBy) {
+                String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId() {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -34,7 +34,7 @@ public class User {
         return userName;
     }
 
-    public void setUserName() {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -42,7 +42,7 @@ public class User {
         return password;
     }
 
-    public void setPassword() {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -50,7 +50,7 @@ public class User {
         return createDate;
     }
 
-    public void setCreateDate() {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -58,7 +58,7 @@ public class User {
         return createdBy;
     }
 
-    public void setCreatedBy() {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -66,15 +66,15 @@ public class User {
         return lastUpdate;
     }
 
-    public void setLastUpdate() {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
     }
 
-    public void setLastUpdateBy() {
-        this.lastUpdateBy = lastUpdateBy;
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }
