@@ -23,6 +23,20 @@ public class LogInController implements Initializable {
     public Button cancelButton;
 
     public void onLogInButton(ActionEvent actionEvent) {
+        //call UserDao.checkLogIn();
+        //if true
+        //4 menu item (one separate main menu fxml)
+        //appointment
+        //customer
+        //report button
+        //exit button
+
+        //addAppointment
+        //addCustomer
+        //modifyAppointment
+        //modifyCustomer
+        //MainView: show all appointment (left) and all customer right(right)
+
     }
 
     public void onResetButton(ActionEvent actionEvent) {
