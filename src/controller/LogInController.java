@@ -29,8 +29,6 @@ public class LogInController implements Initializable {
         System.out.println("Reset button clicked.");
         usernameText.clear();
         passwordText.clear();
-//        usernameText.setText("");
-//        passwordText.setText("");
     }
 
     public void onCancelButton(ActionEvent actionEvent) {

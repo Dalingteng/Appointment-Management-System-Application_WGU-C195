@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,16 +10,16 @@ import database.JDBC;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../view/LogIn.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        stage.setTitle("Appointment Management System");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
-
 
     public static void main(String[] args) {
         JDBC.makeConnection();
         launch(args);
+        JDBC.closeConnection();
     }
 }
