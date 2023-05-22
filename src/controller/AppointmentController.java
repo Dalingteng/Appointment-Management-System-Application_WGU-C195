@@ -1,7 +1,16 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
+import java.util.Optional;
 
 public class AppointmentController {
 
@@ -39,16 +48,35 @@ public class AppointmentController {
     public void onAllRadioButton(ActionEvent actionEvent) {
     }
 
-    public void onCustomerButton(ActionEvent actionEvent) {
+    public void onCustomerButton(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("view.Customer.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
-    public void onReportButton(ActionEvent actionEvent) {
+    public void onReportButton(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("view.Report.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void onLogOutButton(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit The Application");
+        alert.setHeaderText("Are you sure you want to exit?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 
-    public void onAddAppointmentButton(ActionEvent actionEvent) {
+    public void onAddAppointmentButton(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("view.AddAppointment.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void onModifyAppointmentButton(ActionEvent actionEvent) {
