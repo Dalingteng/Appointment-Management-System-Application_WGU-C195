@@ -19,8 +19,8 @@
           <TableColumn fx:id="customerIdColumn" prefWidth="81.0" text="Customer ID" />
           <TableColumn fx:id="customerNameColumn" prefWidth="184.0" text="Customer Name" />
             <TableColumn fx:id="addressColumn" prefWidth="156.0" text="Address" />
-            <TableColumn fx:id="phoneNumberColumn" prefWidth="147.0" text="Phone Number" />
             <TableColumn fx:id="postalCodeColumn" prefWidth="114.0" text="Postal Code" />
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="147.0" text="Phone Number" />
             <TableColumn fx:id="stateProvinceColumn" prefWidth="160.0" text="State/Province" />
             <TableColumn fx:id="countryColumn" prefWidth="127.0" text="Country" />
         </columns>

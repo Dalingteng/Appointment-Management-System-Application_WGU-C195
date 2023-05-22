@@ -13,10 +13,13 @@ public class Customer {
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
     private int divisionId;
+    private String divisionName;
+    private int countryId;
+    private String countryName;
 
     public Customer(int customerId, String customerName, String address, String postalCode, String phone,
                     LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
-                    int divisionId) {
+                    int divisionId, String divisionName, int countryId, String countryName) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
@@ -27,6 +30,9 @@ public class Customer {
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
         this.divisionId = divisionId;
+        this.divisionName = divisionName;
+        this.countryId = countryId;
+        this.countryName = countryName;
     }
 
     public int getCustomerId() {
@@ -107,5 +113,29 @@ public class Customer {
 
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
+    }
+
+    public String getDivisionName() {
+        return divisionName;
+    }
+
+    public void setDivisionName(String divisionName) {
+        this.divisionName = divisionName;
+    }
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 }

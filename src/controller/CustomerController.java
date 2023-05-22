@@ -11,8 +11,8 @@ public class CustomerController {
     public TableColumn customerIdColumn;
     public TableColumn customerNameColumn;
     public TableColumn addressColumn;
-    public TableColumn phoneNumberColumn;
     public TableColumn postalCodeColumn;
+    public TableColumn phoneNumberColumn;
     public TableColumn stateProvinceColumn;
     public TableColumn countryColumn;
     public Button appointmentButton;

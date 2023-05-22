@@ -3,10 +3,7 @@ package controller;
 import database.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.time.ZoneId;
@@ -42,7 +39,6 @@ public class LogInController implements Initializable {
     }
 
     public void onResetButton(ActionEvent actionEvent) {
-        System.out.println("Reset button clicked.");
         usernameText.clear();
         passwordText.clear();
     }

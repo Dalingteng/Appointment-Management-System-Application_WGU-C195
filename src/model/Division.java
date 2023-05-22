@@ -10,9 +10,10 @@ public class Division {
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
     private int countryId;
+    private String countryName;
 
     public Division(int divisionId, String division, LocalDateTime createDate, String createdBy,
-                    LocalDateTime lastUpdate, String lastUpdatedBy, int countryId) {
+                    LocalDateTime lastUpdate, String lastUpdatedBy, int countryId, String countryName) {
         this.divisionId = divisionId;
         this.division = division;
         this.createDate = createDate;
@@ -20,6 +21,7 @@ public class Division {
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
         this.countryId = countryId;
+        this.countryName = countryName;
     }
 
     public int getDivisionId() {
@@ -76,5 +78,13 @@ public class Division {
 
     public void setCountryId(int countryId) {
         this.countryId = countryId;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 }
