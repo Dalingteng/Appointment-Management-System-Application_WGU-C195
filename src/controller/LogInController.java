@@ -1,5 +1,6 @@
 package controller;
 
+import database.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -23,7 +24,8 @@ public class LogInController implements Initializable {
     public Button cancelButton;
 
     public void onLogInButton(ActionEvent actionEvent) {
-        //call UserDao.checkLogIn();
+//        String username =
+//        UserDao.checkLogIn(usernameText, passwordText);
         //if true
         //4 menu item (one separate main menu fxml)
         //appointment
