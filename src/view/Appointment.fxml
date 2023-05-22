@@ -16,32 +16,32 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <DatePicker layoutX="801.0" layoutY="78.0" />
-      <RadioButton layoutX="610.0" layoutY="82.0" mnemonicParsing="false" text="Week" />
-      <RadioButton layoutX="675.0" layoutY="82.0" mnemonicParsing="false" text="Month" />
-      <RadioButton layoutX="746.0" layoutY="81.0" mnemonicParsing="false" text="All" />
-      <TableView layoutX="14.0" layoutY="124.0" prefHeight="370.0" prefWidth="971.0">
+      <DatePicker fx:id="datePicker" layoutX="801.0" layoutY="78.0" />
+      <RadioButton fx:id="weekRadioButton" layoutX="610.0" layoutY="82.0" mnemonicParsing="false" onAction="#onWeekRadioButton" text="Week" />
+      <RadioButton fx:id="monthRadioButton" layoutX="675.0" layoutY="82.0" mnemonicParsing="false" onAction="#onMonthRadioButton" text="Month" />
+      <RadioButton fx:id="allRadioButton" layoutX="746.0" layoutY="81.0" mnemonicParsing="false" onAction="#onAllRadioButton" text="All" />
+      <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="124.0" prefHeight="370.0" prefWidth="971.0">
         <columns>
-          <TableColumn prefWidth="99.0" text="Appointment ID" />
-          <TableColumn prefWidth="74.0" text="Title" />
-            <TableColumn prefWidth="136.0" text="Description" />
-            <TableColumn minWidth="5.666656494140625" prefWidth="81.66668701171875" text="Location" />
-            <TableColumn prefWidth="78.66665649414062" text="Contact" />
-            <TableColumn prefWidth="59.333343505859375" text="Type" />
-            <TableColumn prefWidth="75.0" text="Start Date" />
-            <TableColumn prefWidth="75.0" text="End Date" />
-            <TableColumn prefWidth="75.0" text="Start Time" />
-            <TableColumn prefWidth="75.0" text="End Time" />
-            <TableColumn prefWidth="80.0" text="Customer ID" />
-            <TableColumn prefWidth="60.0" text="User ID" />
+          <TableColumn fx:id="appointmentIdColumn" prefWidth="99.0" text="Appointment ID" />
+          <TableColumn fx:id="titleColumn" prefWidth="74.0" text="Title" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="136.0" text="Description" />
+            <TableColumn fx:id="locationColumn" prefWidth="85.0" text="Location" />
+            <TableColumn fx:id="contactColumn" prefWidth="81.0" text="Contact" />
+            <TableColumn fx:id="typeColumn" prefWidth="55.0" text="Type" />
+            <TableColumn fx:id="startDateColumn" prefWidth="75.0" text="Start Date" />
+            <TableColumn fx:id="endDateColumn" prefWidth="75.0" text="End Date" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="75.0" text="Start Time" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="75.0" text="End Time" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="81.0" text="Customer ID" />
+            <TableColumn fx:id="userIdColumn" prefWidth="59.0" text="User ID" />
         </columns>
       </TableView>
-      <Button layoutX="15.0" layoutY="505.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Customer" />
-      <Button layoutX="15.0" layoutY="536.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Report" />
-      <Button layoutX="834.0" layoutY="535.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Log Out" />
-      <Button layoutX="474.0" layoutY="505.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Add Appointment" />
-      <Button layoutX="653.0" layoutY="505.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Modify Appointment" />
-      <Button layoutX="833.0" layoutY="504.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Delete Appointment" />
-      <Label layoutX="802.0" layoutY="105.0" text="Your Time Zone: Country/Division" />
+      <Button fx:id="customerButton" layoutX="15.0" layoutY="505.0" mnemonicParsing="false" onAction="#onCustomerButton" prefHeight="25.0" prefWidth="150.0" text="Customer" />
+      <Button fx:id="reportButton" layoutX="15.0" layoutY="536.0" mnemonicParsing="false" onAction="#onReportButton" prefHeight="25.0" prefWidth="150.0" text="Report" />
+      <Button fx:id="logOutButton" layoutX="834.0" layoutY="535.0" mnemonicParsing="false" onAction="#onLogOutButton" prefHeight="25.0" prefWidth="150.0" text="Log Out" />
+      <Button fx:id="addAppointmentButton" layoutX="474.0" layoutY="505.0" mnemonicParsing="false" onAction="#onAddAppointmentButton" prefHeight="25.0" prefWidth="150.0" text="Add Appointment" />
+      <Button fx:id="modifyAppointmentButton" layoutX="653.0" layoutY="505.0" mnemonicParsing="false" onAction="#onModifyAppointmentButton" prefHeight="25.0" prefWidth="150.0" text="Modify Appointment" />
+      <Button fx:id="deleteAppointmentButton" layoutX="833.0" layoutY="504.0" mnemonicParsing="false" onAction="#onDeleteAppointmentButton" prefHeight="25.0" prefWidth="150.0" text="Delete Appointment" />
+      <Label fx:id="timeZoneLabel" layoutX="802.0" layoutY="105.0" text="Your Time Zone: Country/Division" />
    </children>
 </AnchorPane>

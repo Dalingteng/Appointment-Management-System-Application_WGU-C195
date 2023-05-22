@@ -14,23 +14,23 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TableView layoutX="14.0" layoutY="124.0" prefHeight="370.0" prefWidth="971.0">
+      <TableView fx:id="customerTable" layoutX="14.0" layoutY="124.0" prefHeight="370.0" prefWidth="971.0">
         <columns>
-          <TableColumn prefWidth="81.0" text="Customer ID" />
-          <TableColumn prefWidth="184.0" text="Customer Name" />
-            <TableColumn prefWidth="156.0" text="Address" />
-            <TableColumn prefWidth="147.0" text="Phone Number" />
-            <TableColumn prefWidth="114.0" text="Postal Code" />
-            <TableColumn prefWidth="160.0" text="State/Province" />
-            <TableColumn prefWidth="127.0" text="Country" />
+          <TableColumn fx:id="customerIdColumn" prefWidth="81.0" text="Customer ID" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="184.0" text="Customer Name" />
+            <TableColumn fx:id="addressColumn" prefWidth="156.0" text="Address" />
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="147.0" text="Phone Number" />
+            <TableColumn fx:id="postalCodeColumn" prefWidth="114.0" text="Postal Code" />
+            <TableColumn fx:id="stateProvinceColumn" prefWidth="160.0" text="State/Province" />
+            <TableColumn fx:id="countryColumn" prefWidth="127.0" text="Country" />
         </columns>
       </TableView>
-      <Button layoutX="15.0" layoutY="505.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Appointment" />
-      <Button layoutX="15.0" layoutY="536.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Report" />
-      <Button layoutX="834.0" layoutY="535.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Log Out" />
-      <Button layoutX="474.0" layoutY="505.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Add Customer" />
-      <Button layoutX="653.0" layoutY="505.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Modify Customer" />
-      <Button layoutX="833.0" layoutY="504.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Delete Customer" />
-      <Label layoutX="800.0" layoutY="105.0" text="Your Time Zone: Country/Division" />
+      <Button fx:id="appointmentButton" layoutX="15.0" layoutY="505.0" mnemonicParsing="false" onAction="#onAppointmentButton" prefHeight="25.0" prefWidth="150.0" text="Appointment" />
+      <Button fx:id="reportButton" layoutX="15.0" layoutY="536.0" mnemonicParsing="false" onAction="#onReportButton" prefHeight="25.0" prefWidth="150.0" text="Report" />
+      <Button fx:id="logOutButton" layoutX="834.0" layoutY="535.0" mnemonicParsing="false" onAction="#onLogOutButton" prefHeight="25.0" prefWidth="150.0" text="Log Out" />
+      <Button fx:id="addCustomerButton" layoutX="474.0" layoutY="505.0" mnemonicParsing="false" onAction="#onAddCustomerButton" prefHeight="25.0" prefWidth="150.0" text="Add Customer" />
+      <Button fx:id="modifyCustomerButton" layoutX="653.0" layoutY="505.0" mnemonicParsing="false" onAction="#onModifyCustomerButton" prefHeight="25.0" prefWidth="150.0" text="Modify Customer" />
+      <Button fx:id="deleteCustomerButton" layoutX="833.0" layoutY="504.0" mnemonicParsing="false" onAction="#onDeleteCustomerButton" prefHeight="25.0" prefWidth="150.0" text="Delete Customer" />
+      <Label fx:id="timeZoneLabel" layoutX="800.0" layoutY="105.0" text="Your Time Zone: Country/Division" />
    </children>
 </AnchorPane>
