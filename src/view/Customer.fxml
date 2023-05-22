@@ -20,9 +20,9 @@
           <TableColumn fx:id="customerNameColumn" prefWidth="184.0" text="Customer Name" />
             <TableColumn fx:id="addressColumn" prefWidth="156.0" text="Address" />
             <TableColumn fx:id="postalCodeColumn" prefWidth="114.0" text="Postal Code" />
-            <TableColumn fx:id="phoneNumberColumn" prefWidth="147.0" text="Phone Number" />
-            <TableColumn fx:id="stateProvinceColumn" prefWidth="160.0" text="State/Province" />
-            <TableColumn fx:id="countryColumn" prefWidth="127.0" text="Country" />
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="160.0" text="Phone Number" />
+            <TableColumn fx:id="divisionColumn" prefWidth="137.0" text="Division" />
+            <TableColumn fx:id="countryColumn" prefWidth="137.0" text="Country" />
         </columns>
       </TableView>
       <Button fx:id="appointmentButton" layoutX="15.0" layoutY="505.0" mnemonicParsing="false" onAction="#onAppointmentButton" prefHeight="25.0" prefWidth="150.0" text="Appointment" />

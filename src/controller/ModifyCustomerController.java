@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class AddCustomerController {
+public class ModifyCustomerController {
     public TextField customerIdTextField;
     public TextField customerNameTextField;
     public TextField addressTextField;

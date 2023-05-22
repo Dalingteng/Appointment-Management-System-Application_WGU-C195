@@ -14,8 +14,8 @@ public class LogInController implements Initializable {
     public Label passwordLabel;
     public Label timeZoneLabel;
     public Label userTimeZoneLabel;
-    public TextField usernameText;
-    public PasswordField passwordText;
+    public TextField usernameTextField;
+    public PasswordField passwordTextField;
     public Button logInButton;
     public Button resetButton;
     public Button cancelButton;
@@ -39,8 +39,8 @@ public class LogInController implements Initializable {
     }
 
     public void onResetButton(ActionEvent actionEvent) {
-        usernameText.clear();
-        passwordText.clear();
+        usernameTextField.clear();
+        passwordTextField.clear();
     }
 
     public void onCancelButton(ActionEvent actionEvent) {

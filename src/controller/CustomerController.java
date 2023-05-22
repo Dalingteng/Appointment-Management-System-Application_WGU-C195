@@ -13,7 +13,7 @@ public class CustomerController {
     public TableColumn addressColumn;
     public TableColumn postalCodeColumn;
     public TableColumn phoneNumberColumn;
-    public TableColumn stateProvinceColumn;
+    public TableColumn divisionColumn;
     public TableColumn countryColumn;
     public Button appointmentButton;
     public Button reportButton;
