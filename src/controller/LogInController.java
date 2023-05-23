@@ -10,12 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.User;
-import utility.DataProvider;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 
@@ -29,47 +26,30 @@ public class LogInController implements Initializable {
     public Button logInButton;
     public Button resetButton;
     public Button cancelButton;
-
     static ObservableList<User> users;
 
     public void onLogInButton(ActionEvent actionEvent) throws SQLException, IOException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-//        boolean validUser = UserDao.checkLogIn(username, password);
-        boolean match = false;
-//        if(validUser) {
-
+        boolean validUser = false;
         for(User u: users) {
             if(u.getUserName().equals(username) && u.getPassword().equals(password)) {
-                match = true;
-                DataProvider.username = username;
+                validUser = true;
                 break;
             }
         }
-        if(match) {
+        if(validUser) {
             Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
         }
         else {
-            System.out.println("ERROR");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Invalid Username or Password");
+            alert.showAndWait();
         }
-//        String username =
-//        UserDao.checkLogIn(usernameText, passwordText);
-        //if true
-        //4 menu item (one separate main menu fxml)
-        //appointment
-        //customer
-        //report button
-        //exit button
-
-        //addAppointment
-        //addCustomer
-        //modifyAppointment
-        //modifyCustomer
-        //MainView: show all appointment (left) and all customer right(right)
-
     }
 
     public void onResetButton(ActionEvent actionEvent) {
@@ -87,17 +67,9 @@ public class LogInController implements Initializable {
         userTimeZoneLabel.setText(String.valueOf(zone));
 
         try {
-//            if(users.isEmpty()) {
-                users = UserDao.select();
-//                System.out.println("First Log In");
-//            }
-//            else {
-//                System.out.println("Not First");
-//            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            users = UserDao.getAllUsers();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-
     }
 }

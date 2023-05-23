@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
-    public static boolean checkLogIn(String username, String password) throws SQLException {
+//    public static boolean checkLogIn(String username, String password) throws SQLException {
 //        Connection conn = JDBC.getConnection();
 //        String sqlStatement = "SELECT * FROM users WHERE User_Name = ? and Password = ?";
 //
@@ -21,20 +21,22 @@ public class UserDao {
 //        while(rs.next()) {
 //            return true;
 //        }
-        return false;
-    }
+//        return false;
+//    }
 
-    public static ObservableList<User> select() throws SQLException {
+    public static ObservableList<User> getAllUsers() throws SQLException {
         String sql = "SELECT * FROM users";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-        ObservableList<User> users = FXCollections.observableArrayList();
+        ObservableList<User> allUsers = FXCollections.observableArrayList();
         while(rs.next()) {
-            int id = rs.getInt("User_ID");
-            String username = rs.getString("User_Name");
+            int userId = rs.getInt("User_ID");
+            String userName = rs.getString("User_Name");
             String password = rs.getString("Password");
-            users.add(new User(id, username, password));
+            allUsers.add(new User(userId, userName, password));
         }
-        return users;
+        return allUsers;
     }
+
+
 }
