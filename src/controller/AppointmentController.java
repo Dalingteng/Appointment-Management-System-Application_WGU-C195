@@ -2,11 +2,13 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AppointmentController {
@@ -70,10 +72,27 @@ public class AppointmentController {
     }
 
     public void onAddAppointmentButton(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("view.AddAppointment.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.show();
+//        Parent parent = FXMLLoader.load(getClass().getResource("view.AddAppointment.fxml"));
+//        Stage stage = new Stage();
+//        stage.setScene(new Scene(parent));
+//        stage.show();
+
+//        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+//        parent = FXMLLoader.load(getClass().getResource("view/AddAppointment.fxml"));
+//        stage.setScene(new Scene(parent));
+//        stage.show();
+
+//        Parent parent = FXMLLoader.load(getClass().getResource("view/AddAppointment.fxml"));
+//        Scene scene = new Scene(parent);
+//        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+//        window.setScene(scene);
+//        window.show();
+
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("view/AddAppointment.fxml"));
+//        Scene scene = loader.load();
+//        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+//        stage.setScene(scene);
     }
 
     public void onModifyAppointmentButton(ActionEvent actionEvent) {
