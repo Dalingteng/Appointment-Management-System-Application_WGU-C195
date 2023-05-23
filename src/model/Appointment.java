@@ -8,8 +8,10 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private LocalDateTime createDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
@@ -19,15 +21,18 @@ public class Appointment {
     private int contactId;
 
     public Appointment(int appointmentId, String title, String description, String location, String type,
-                       LocalDateTime start, LocalDateTime end, LocalDateTime createDate, String createdBy,
-                       LocalDateTime lastUpdate, String lastUpdatedBy, int customerId, int userId, int contactId) {
+                       LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startTime, LocalDateTime endTime,
+                       LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
+                       int customerId, int userId, int contactId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;
         this.location = location;
         this.type = type;
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
@@ -77,20 +82,36 @@ public class Appointment {
         this.type = type;
     }
 
-    public LocalDateTime getStart() {
-        return start;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setStart(LocalDateTime start) {
-        this.start = start;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDateTime getEnd() {
-        return end;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public LocalDateTime getCreateDate() {
