@@ -7,7 +7,7 @@ public class Customer {
     private String customerName;
     private String address;
     private String postalCode;
-    private String phone;
+    private String phoneNumber;
     private LocalDateTime createDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
@@ -17,18 +17,31 @@ public class Customer {
     private int countryId;
     private String countryName;
 
-    public Customer(int customerId, String customerName, String address, String postalCode, String phone,
+    public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber,
                     LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
                     int divisionId, String divisionName, int countryId, String countryName) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
+        this.divisionId = divisionId;
+        this.divisionName = divisionName;
+        this.countryId = countryId;
+        this.countryName = countryName;
+    }
+
+    public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber, 
+                    int divisionId, String divisionName, int countryId, String countryName) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.phoneNumber = phoneNumber;
         this.divisionId = divisionId;
         this.divisionName = divisionName;
         this.countryId = countryId;
@@ -67,12 +80,12 @@ public class Customer {
         this.postalCode = postalCode;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public LocalDateTime getCreateDate() {

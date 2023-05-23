@@ -20,6 +20,11 @@ public class Country {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
+    public Country(int countryId, String country) {
+        this.countryId = countryId;
+        this.country = country;
+    }
+
     public int getCountryId() {
         return countryId;
     }

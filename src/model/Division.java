@@ -24,6 +24,13 @@ public class Division {
         this.countryName = countryName;
     }
 
+    public Division(int divisionId, String division, int countryId, String countryName) {
+        this.divisionId = divisionId;
+        this.division = division;
+        this.countryId = countryId;
+        this.countryName = countryName;
+    }
+
     public int getDivisionId() {
         return divisionId;
     }
