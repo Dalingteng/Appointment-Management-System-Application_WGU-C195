@@ -51,7 +51,7 @@ public class AppointmentController {
 
     public void onReportButton(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../view/Report.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/ReportContact.fxml"));
         stage.setScene(new Scene(parent));
         stage.show();
     }
