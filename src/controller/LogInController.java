@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import model.User;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
