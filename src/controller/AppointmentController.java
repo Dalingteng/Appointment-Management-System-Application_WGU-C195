@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class AppointmentController {
-
-    public DatePicker datePicker;
     public RadioButton weekRadioButton;
     public RadioButton monthRadioButton;
     public RadioButton allRadioButton;
@@ -34,7 +32,6 @@ public class AppointmentController {
     public Button addAppointmentButton;
     public Button modifyAppointmentButton;
     public Button deleteAppointmentButton;
-    public Label timeZoneLabel;
 
     public void onWeekRadioButton(ActionEvent actionEvent) {
     }
@@ -46,15 +43,15 @@ public class AppointmentController {
     }
 
     public void onCustomerButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../view/Customer.fxml"));
-        Stage stage = new Stage();
         stage.setScene(new Scene(parent));
         stage.show();
     }
 
     public void onReportButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../view/Report.fxml"));
-        Stage stage = new Stage();
         stage.setScene(new Scene(parent));
         stage.show();
     }
@@ -70,8 +67,8 @@ public class AppointmentController {
     }
 
     public void onAddAppointmentButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../view/AddAppointment.fxml"));
-        Stage stage = new Stage();
         stage.setScene(new Scene(parent));
         stage.show();
     }

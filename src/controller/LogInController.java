@@ -28,7 +28,7 @@ public class LogInController implements Initializable {
     public Button cancelButton;
     static ObservableList<User> users;
 
-    public void onLogInButton(ActionEvent actionEvent) throws SQLException, IOException {
+    public void onLogInButton(ActionEvent actionEvent) throws IOException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         boolean validUser = false;
@@ -39,14 +39,14 @@ public class LogInController implements Initializable {
             }
         }
         if(validUser) {
+            Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
             Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
-            Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
+            alert.setTitle("Log In Error");
             alert.setHeaderText("Invalid Username or Password");
             alert.showAndWait();
         }

@@ -1,9 +1,14 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class ModifyCustomerController {
     public TextField customerIdTextField;
@@ -25,6 +30,16 @@ public class ModifyCustomerController {
     public void onSaveButton(ActionEvent actionEvent) {
     }
 
-    public void onCancelButton(ActionEvent actionEvent) {
+    public void onCancelButton(ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel Confirmation");
+        alert.setHeaderText("Are you sure you want to cancel?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+            Parent parent = FXMLLoader.load(getClass().getResource("../view/Customer.fxml"));
+            stage.setScene(new Scene(parent));
+            stage.show();
+        }
     }
 }
