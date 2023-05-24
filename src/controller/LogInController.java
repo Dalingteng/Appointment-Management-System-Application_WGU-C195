@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
@@ -63,13 +64,28 @@ public class LogInController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ZoneId zone = ZoneId.systemDefault();
-        userTimeZoneLabel.setText(String.valueOf(zone));
+        userTimeZoneLabel.setText(String.valueOf(ZoneId.systemDefault()));
+
+//        try {
+//            users = UserDao.getAllUsers();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         try {
             users = UserDao.getAllUsers();
-        } catch (SQLException e) {
+            if (Locale.getDefault().getLanguage().equals("fr")) {
+                ResourceBundle rb = ResourceBundle.getBundle("language/language_fr", Locale.getDefault());
+                usernameLabel.setText(rb.getString("Username"));
+                passwordLabel.setText(rb.getString("Password"));
+                timeZoneLabel.setText(rb.getString("Time Zone"));
+                logInButton.setText(rb.getString("Log In"));
+                resetButton.setText(rb.getString("Reset"));
+                cancelButton.setText(rb.getString("Cancel"));
+            }
+        }catch(Exception e){
             e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
