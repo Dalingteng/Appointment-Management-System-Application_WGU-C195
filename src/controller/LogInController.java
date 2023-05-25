@@ -83,7 +83,6 @@ public class LogInController implements Initializable {
                 cancelButton.setText(rb.getString("Cancel"));
             }
         }catch(Exception e){
-            e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
         }
     }

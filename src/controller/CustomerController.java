@@ -1,23 +1,32 @@
 package controller;
 
+import database.CustomerDao;
+import database.JDBC;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.Optional;
+import model.Customer;
 
-public class CustomerController {
-    public TableView customerTable;
-    public TableColumn customerIdColumn;
-    public TableColumn customerNameColumn;
-    public TableColumn addressColumn;
-    public TableColumn postalCodeColumn;
-    public TableColumn phoneNumberColumn;
-    public TableColumn divisionColumn;
-    public TableColumn countryColumn;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class CustomerController implements Initializable {
+    public TableView<Customer> customerTable;
+    public TableColumn<Customer, Integer> customerIdColumn;
+    public TableColumn<Customer, String> customerNameColumn;
+    public TableColumn<Customer, String> addressColumn;
+    public TableColumn<Customer, String> postalCodeColumn;
+    public TableColumn<Customer, String> phoneNumberColumn;
+    public TableColumn<Customer, String> divisionColumn;
+    public TableColumn<Customer, String> countryColumn;
     public Button backButton;
     public Button logOutButton;
     public Button addCustomerButton;
@@ -52,5 +61,24 @@ public class CustomerController {
     }
 
     public void onDeleteCustomerButton(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        divisionColumn.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("countryName"));
+
+        try {
+            JDBC.makeConnection();
+            customerTable.setItems(CustomerDao.getAllCustomers());
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }

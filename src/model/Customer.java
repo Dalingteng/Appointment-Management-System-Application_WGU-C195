@@ -35,16 +35,13 @@ public class Customer {
         this.countryName = countryName;
     }
 
-    public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber, 
-                    int divisionId, String divisionName, int countryId, String countryName) {
+    public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber, String divisionName, String countryName) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
-        this.divisionId = divisionId;
         this.divisionName = divisionName;
-        this.countryId = countryId;
         this.countryName = countryName;
     }
 
