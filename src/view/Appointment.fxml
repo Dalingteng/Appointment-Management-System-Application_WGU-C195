@@ -24,14 +24,14 @@
           <TableColumn fx:id="titleColumn" prefWidth="67.0" text="Title" />
             <TableColumn fx:id="descriptionColumn" prefWidth="116.0" text="Description" />
             <TableColumn fx:id="locationColumn" prefWidth="81.0" text="Location" />
-            <TableColumn fx:id="contactColumn" prefWidth="78.0" text="Contact" />
             <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="startDateColumn" prefWidth="75.0" text="Start Date" />
             <TableColumn fx:id="endDateColumn" prefWidth="75.0" text="End Date" />
             <TableColumn fx:id="startTimeColumn" prefWidth="75.0" text="Start Time" />
             <TableColumn fx:id="endTimeColumn" prefWidth="75.0" text="End Time" />
             <TableColumn fx:id="customerIdColumn" prefWidth="81.0" text="Customer ID" />
-            <TableColumn fx:id="userIdColumn" prefWidth="58.0" text="User ID" />
+            <TableColumn fx:id="userIdColumn" prefWidth="66.0" text="User ID" />
+            <TableColumn fx:id="contactIdColumn" prefWidth="70.0" text="Contact ID" />
         </columns>
       </TableView>
       <Button fx:id="customerButton" layoutX="15.0" layoutY="505.0" mnemonicParsing="false" onAction="#onCustomerButton" prefHeight="25.0" prefWidth="150.0" text="Customer" />

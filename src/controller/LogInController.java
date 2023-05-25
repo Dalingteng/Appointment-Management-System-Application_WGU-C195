@@ -65,12 +65,6 @@ public class LogInController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userTimeZoneLabel.setText(String.valueOf(ZoneId.systemDefault()));
 
-//        try {
-//            users = UserDao.getAllUsers();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
         try {
             users = UserDao.getAllUsers();
             if (Locale.getDefault().getLanguage().equals("fr")) {

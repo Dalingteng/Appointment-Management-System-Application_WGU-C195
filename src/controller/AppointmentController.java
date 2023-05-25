@@ -18,7 +18,6 @@ public class AppointmentController {
     public TableColumn titleColumn;
     public TableColumn descriptionColumn;
     public TableColumn locationColumn;
-    public TableColumn contactColumn;
     public TableColumn typeColumn;
     public TableColumn startDateColumn;
     public TableColumn endDateColumn;
@@ -26,6 +25,7 @@ public class AppointmentController {
     public TableColumn endTimeColumn;
     public TableColumn customerIdColumn;
     public TableColumn userIdColumn;
+    public TableColumn contactIdColumn;
     public Button customerButton;
     public Button reportButton;
     public Button logOutButton;
