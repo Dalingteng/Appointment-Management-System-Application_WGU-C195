@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class AppointmentDao {
-    public ObservableList<Appointment> getAllAppointments() throws SQLException {
+    public static ObservableList<Appointment> getAllAppointments() throws SQLException {
         String sql = "SELECT * FROM appointments";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();

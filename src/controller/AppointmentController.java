@@ -1,31 +1,42 @@
 package controller;
 
+import database.AppointmentDao;
+import database.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.Optional;
+import model.Appointment;
 
-public class AppointmentController {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class AppointmentController implements Initializable {
     public RadioButton weekRadioButton;
     public RadioButton monthRadioButton;
     public RadioButton allRadioButton;
-    public TableView appointmentTable;
-    public TableColumn appointmentIdColumn;
-    public TableColumn titleColumn;
-    public TableColumn descriptionColumn;
-    public TableColumn locationColumn;
-    public TableColumn typeColumn;
-    public TableColumn startDateColumn;
-    public TableColumn endDateColumn;
-    public TableColumn startTimeColumn;
-    public TableColumn endTimeColumn;
-    public TableColumn customerIdColumn;
-    public TableColumn userIdColumn;
-    public TableColumn contactIdColumn;
+    public TableView<Appointment> appointmentTable;
+    public TableColumn<Appointment, Integer> appointmentIdColumn;
+    public TableColumn<Appointment, String> titleColumn;
+    public TableColumn<Appointment, String> descriptionColumn;
+    public TableColumn<Appointment, String> locationColumn;
+    public TableColumn<Appointment, String> typeColumn;
+    public TableColumn<Appointment, LocalDate> startDateColumn;
+    public TableColumn<Appointment, LocalDate> endDateColumn;
+    public TableColumn<Appointment, LocalTime> startTimeColumn;
+    public TableColumn<Appointment, LocalTime> endTimeColumn;
+    public TableColumn<Appointment, Integer> customerIdColumn;
+    public TableColumn<Appointment, Integer> userIdColumn;
+    public TableColumn<Appointment, Integer> contactIdColumn;
     public Button customerButton;
     public Button reportButton;
     public Button logOutButton;
@@ -77,5 +88,28 @@ public class AppointmentController {
     }
 
     public void onDeleteAppointmentButton(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        contactIdColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+
+        try {
+            JDBC.makeConnection();
+            appointmentTable.setItems(AppointmentDao.getAllAppointments());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }

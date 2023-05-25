@@ -17,7 +17,7 @@
       </Label>
       <RadioButton fx:id="weekRadioButton" layoutX="812.0" layoutY="83.0" mnemonicParsing="false" onAction="#onWeekRadioButton" text="Week" />
       <RadioButton fx:id="monthRadioButton" layoutX="877.0" layoutY="83.0" mnemonicParsing="false" onAction="#onMonthRadioButton" text="Month" />
-      <RadioButton fx:id="allRadioButton" layoutX="948.0" layoutY="82.0" mnemonicParsing="false" onAction="#onAllRadioButton" text="All" />
+      <RadioButton fx:id="allRadioButton" layoutX="948.0" layoutY="82.0" mnemonicParsing="false" onAction="#onAllRadioButton" selected="true" text="All" />
       <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="106.0" prefHeight="388.0" prefWidth="971.0">
         <columns>
           <TableColumn fx:id="appointmentIdColumn" prefWidth="114.0" text="Appointment ID" />
