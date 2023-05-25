@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DivisionDao {
     public static ObservableList<Division> getAllDivisions() throws SQLException {
-        String sql = "SELECT * FROM first_level_divisions, countries WHERE first_level_divisions.Country_ID" + "= countries.Country_ID";
+        String sql = "SELECT * FROM first_level_divisions, countries WHERE first_level_divisions.Country_ID = countries.Country_ID";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         ObservableList<Division> allDivisions = FXCollections.observableArrayList();
