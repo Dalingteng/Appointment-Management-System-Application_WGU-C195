@@ -16,7 +16,7 @@ public class AddAppointmentController {
     public TextField descriptionTextField;
     public TextField locationTextField;
     public TextField typeTextField;
-    public ComboBox contactComboBox;
+    public ComboBox contactIdComboBox;
     public ComboBox customerIdComboBox;
     public ComboBox userIdComboBox;
     public DatePicker startDatePicker;
