@@ -35,6 +35,15 @@ public class LogInController implements Initializable {
         for(User u: users) {
             if(u.getUserName().equals(username) && u.getPassword().equals(password)) {
                 validUser = true;
+                //get the userID
+                //get all appointments
+                //for all appointments, check if userId matches
+                //if match, look for start date match
+                //LocalDate.now() //current date
+                //if date match, check start time (start time between now and + 15 min)
+                //alert if found or not found
+
+                //file for valid/invalid user (login_activity.txt)
                 break;
             }
         }

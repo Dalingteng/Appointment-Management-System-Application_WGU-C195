@@ -47,8 +47,8 @@ public class AddCustomerController implements Initializable {
         address = addressTextField.getText();
         postalCode = postalCodeTextField.getText();
         phoneNumber = phoneNumberTextField.getText();
-        countryName = countryComboBox.getSelectionModel().getSelectedItem().getCountryName();
-        divisionName = divisionComboBox.getSelectionModel().getSelectedItem().getDivisionName();
+        countryName = countryComboBox.getValue().getCountryName();
+        divisionName = divisionComboBox.getValue().getDivisionName();
 
         if(customerName.isEmpty()) {
 //            Alert alert = new Alert(Alert.AlertType.ERROR);

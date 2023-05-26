@@ -25,9 +25,9 @@ public class AppointmentDao {
             LocalDateTime startDateTime = rs.getTimestamp("Start").toLocalDateTime();
             LocalDateTime endDateTime = rs.getTimestamp("End").toLocalDateTime();
             LocalDate startDate = startDateTime.toLocalDate();
-            LocalDate endDate = startDateTime.toLocalDate();
+            LocalDate endDate = endDateTime.toLocalDate();
             LocalTime startTime = startDateTime.toLocalTime();
-            LocalTime endTime = startDateTime.toLocalTime();
+            LocalTime endTime = endDateTime.toLocalTime();
             int customerId = rs.getInt("Customer_ID");
             int userId = rs.getInt("User_ID");
             int contactId = rs.getInt("Contact_ID");
