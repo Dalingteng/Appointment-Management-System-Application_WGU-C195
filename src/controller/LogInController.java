@@ -66,7 +66,7 @@ public class LogInController implements Initializable {
                 }
                 if(upcomingAppointments.isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("No Upcoming Appointments");
+                    alert.setTitle("Upcoming Appointments Alert");
                     alert.setHeaderText("No Upcoming Appointments");
                     alert.setContentText("There is no appointments within the next 15 minutes.");
                     alert.showAndWait();
@@ -77,23 +77,11 @@ public class LogInController implements Initializable {
                         reminder = ("Appointment ID: " + a.getAppointmentId() + " , Date & Time: " + a.getStartDate() + " (" + a.getStartTime() + ")\n") + reminder;
                     }
                     Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Upcoming Appointments");
+                    alert.setTitle("Upcoming Appointments Alert");
                     alert.setHeaderText("Upcoming Appointments Reminder");
                     alert.setContentText(reminder);
                     alert.showAndWait();
                 }
-
-
-
-                //get the userID
-                //get all appointments
-                //for all appointments, check if userId matches
-                //if match, look for start date match
-                //LocalDate.now() //current date
-                //if date match, check start time (start time between now and + 15 min)
-                //alert if found or not found
-
-                //file for valid/invalid user (login_activity.txt)
                 break;
             }
         }
@@ -102,13 +90,16 @@ public class LogInController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
             stage.setScene(new Scene(parent));
             stage.show();
+            outputFile.println("Successful Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Log In Error");
             alert.setHeaderText("Invalid Username or Password");
             alert.showAndWait();
+            outputFile.println("Failed Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
         }
+        outputFile.close();
     }
 
     public void onResetButton(ActionEvent actionEvent) {
