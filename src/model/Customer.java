@@ -16,6 +16,7 @@ public class Customer {
     private String divisionName;
     private int countryId;
     private String countryName;
+    private static int autoCustomerId = 1;
 
     public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber,
                     LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
@@ -147,5 +148,9 @@ public class Customer {
 
     public void setCountryName(String countryName) {
         this.countryName = countryName;
+    }
+
+    public static int getAutoId(){
+        return autoCustomerId++;
     }
 }

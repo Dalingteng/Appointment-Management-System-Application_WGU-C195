@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Division {
     private int divisionId;
-    private String division;
+    private String divisionName;
     private LocalDateTime createDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
@@ -12,10 +12,10 @@ public class Division {
     private int countryId;
     private String countryName;
 
-    public Division(int divisionId, String division, LocalDateTime createDate, String createdBy,
+    public Division(int divisionId, String divisionName, LocalDateTime createDate, String createdBy,
                     LocalDateTime lastUpdate, String lastUpdatedBy, int countryId, String countryName) {
         this.divisionId = divisionId;
-        this.division = division;
+        this.divisionName = divisionName;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
@@ -24,9 +24,9 @@ public class Division {
         this.countryName = countryName;
     }
 
-    public Division(int divisionId, String division, int countryId, String countryName) {
+    public Division(int divisionId, String divisionName, int countryId, String countryName) {
         this.divisionId = divisionId;
-        this.division = division;
+        this.divisionName = divisionName;
         this.countryId = countryId;
         this.countryName = countryName;
     }
@@ -39,12 +39,12 @@ public class Division {
         this.divisionId = divisionId;
     }
 
-    public String getDivision() {
-        return division;
+    public String getDivisionName() {
+        return divisionName;
     }
 
-    public void setDivision(String division) {
-        this.division = division;
+    public void setDivisionName(String divisionName) {
+        this.divisionName = divisionName;
     }
 
     public LocalDateTime getCreateDate() {
@@ -93,5 +93,10 @@ public class Division {
 
     public void setCountryName(String countryName) {
         this.countryName = countryName;
+    }
+
+    @Override
+    public String toString() {
+        return divisionName;
     }
 }

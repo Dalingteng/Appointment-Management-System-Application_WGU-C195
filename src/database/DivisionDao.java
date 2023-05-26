@@ -22,4 +22,21 @@ public class DivisionDao {
         }
         return allDivisions;
     }
+
+    public static ObservableList<Division> getDivisionsByCountry(int countryId) throws SQLException {
+        String sql = "SELECT * FROM first_level_divisions, countries WHERE first_level_divisions.Country_ID = countries.Country_ID AND " +
+                "countries.Country_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, countryId);
+        ResultSet rs = ps.executeQuery();
+        ObservableList<Division> divisionsByCountry = FXCollections.observableArrayList();
+        while (rs.next()) {
+            int divisionId = rs.getInt("Division_ID");
+            String divisionName = rs.getString("Division");
+            countryId = rs.getInt("Country_ID");
+            String countryName = rs.getString("Country");
+            divisionsByCountry.add(new Division(divisionId, divisionName, countryId, countryName));
+        }
+        return divisionsByCountry;
+    }
 }

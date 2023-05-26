@@ -21,13 +21,13 @@
       <Label layoutX="53.0" layoutY="215.0" text="Phone Number" />
       <Label layoutX="53.0" layoutY="246.0" text="Country" />
       <Label layoutX="339.0" layoutY="246.0" text="Division" />
-      <TextField fx:id="customerIdTextField" layoutX="159.0" layoutY="85.0" />
+      <TextField fx:id="customerIdTextField" editable="false" layoutX="159.0" layoutY="85.0" promptText="Auto Gen - Disabled" />
       <TextField fx:id="customerNameTextField" layoutX="159.0" layoutY="117.0" />
       <TextField fx:id="addressTextField" layoutX="159.0" layoutY="148.0" />
       <TextField fx:id="postalCodeTextField" layoutX="159.0" layoutY="179.0" />
       <TextField fx:id="phoneNumberTextField" layoutX="159.0" layoutY="211.0" />
       <ComboBox fx:id="countryComboBox" layoutX="159.0" layoutY="242.0" onAction="#onCountryComboBox" prefWidth="150.0" />
-      <ComboBox fx:id="divisionComboBox" layoutX="409.0" layoutY="242.0" onAction="#onDivisionComboBox" prefWidth="150.0" />
+      <ComboBox fx:id="divisionComboBox" layoutX="409.0" layoutY="242.0" prefWidth="150.0" />
       <Button fx:id="saveButton" layoutX="198.0" layoutY="318.0" mnemonicParsing="false" onAction="#onSaveButton" prefHeight="25.0" prefWidth="80.0" text="Save" />
       <Button fx:id="cancelButton" layoutX="329.0" layoutY="318.0" mnemonicParsing="false" onAction="#onCancelButton" prefHeight="25.0" prefWidth="80.0" text="Cancel" />
    </children>

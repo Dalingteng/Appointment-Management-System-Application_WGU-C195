@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 
 public class Country {
     private int countryId;
-    private String country;
+    private String countryName;
     private LocalDateTime createDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
 
-    public Country(int countryId, String country, LocalDateTime createDate, String createdBy,
+    public Country(int countryId, String countryName, LocalDateTime createDate, String createdBy,
                    LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.countryId = countryId;
-        this.country = country;
+        this.countryName = countryName;
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public Country(int countryId, String country) {
+    public Country(int countryId, String countryName) {
         this.countryId = countryId;
-        this.country = country;
+        this.countryName = countryName;
     }
 
     public int getCountryId() {
@@ -33,12 +33,12 @@ public class Country {
         this.countryId = countryId;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 
     public LocalDateTime getCreateDate() {
@@ -71,5 +71,10 @@ public class Country {
 
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    @Override
+    public String toString() {
+        return countryName;
     }
 }

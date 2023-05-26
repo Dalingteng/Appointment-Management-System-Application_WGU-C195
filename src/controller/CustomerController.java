@@ -2,7 +2,6 @@ package controller;
 
 import database.CustomerDao;
 import database.JDBC;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
