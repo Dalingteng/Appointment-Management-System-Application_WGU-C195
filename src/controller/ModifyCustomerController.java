@@ -36,6 +36,7 @@ public class ModifyCustomerController implements Initializable {
     private int divisionId;
 
     public void passCustomer(Customer selectedCustomer) throws SQLException {
+        JDBC.makeConnection();
         passSelectedCustomer = selectedCustomer;
         idIndex = CustomerDao.getAllCustomers().indexOf(passSelectedCustomer);
 
@@ -44,29 +45,21 @@ public class ModifyCustomerController implements Initializable {
         addressTextField.setText(selectedCustomer.getAddress());
         postalCodeTextField.setText(selectedCustomer.getPostalCode());
         phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
-//        countryComboBox.getValue().getCountryName();
-//        divisionComboBox.getValue().getDivisionName();
 
-//        Country selectedCountry = countryComboBox.getSelectionModel().getSelectedItem();
-//        countryId = selectedCountry.getCountryId();
-//        countryComboBox.getValue().getCountryName();
-//        Division selectedDivision = divisionComboBox.getSelectionModel().getSelectedItem();
-//        divisionId = selectedDivision.getDivisionId();
-//        divisionComboBox.getValue().getDivisionName();
         Country selectedCountry = null;
         for(Country country: CountryDao.getAllCountries()) {
-            if(country.getCountryId() == selectedCustomer.getCountryId()) {
+            if(country.getCountryName().equals(selectedCustomer.getCountryName())) {
                 selectedCountry = country;
                 break;
             }
         }
         countryComboBox.getSelectionModel().select(selectedCountry);
         countryId = selectedCountry.getCountryId();
-//        countryComboBox.getValue().getCountryName();
 
+//        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
         Division selectedDivision = null;
         for(Division division: DivisionDao.getDivisionsByCountry(countryId)) {
-            if(division.getDivisionId() == selectedCustomer.getDivisionId()) {
+            if(division.getDivisionName().equals(selectedCustomer.getDivisionName())) {
                 selectedDivision = division;
                 break;
             }
@@ -74,6 +67,10 @@ public class ModifyCustomerController implements Initializable {
         divisionComboBox.getSelectionModel().select(selectedDivision);
         divisionId = selectedDivision.getDivisionId();
 //        divisionComboBox.setValue(selectedDivision);
+//        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
+
+//        countryComboBox.getSelectionModel().getSelectedItem();
+//        divisionComboBox.getSelectionModel().getSelectedItem();
     }
 
     public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
@@ -133,6 +130,7 @@ public class ModifyCustomerController implements Initializable {
             JDBC.makeConnection();
             countryComboBox.setItems(CountryDao.getAllCountries());
             countryComboBox.getSelectionModel().getSelectedItem();
+            countryId = countryComboBox.getValue().getCountryId();
             divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
             divisionComboBox.getSelectionModel().getSelectedItem();
         } catch (Exception e) {
