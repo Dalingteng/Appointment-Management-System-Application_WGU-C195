@@ -93,11 +93,22 @@ public class LogInController implements Initializable {
             outputFile.println("Successful Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Log In Error");
-            alert.setHeaderText("Invalid Username or Password");
-            alert.showAndWait();
-            outputFile.println("Failed Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
+            if (Locale.getDefault().getLanguage().equals("fr")) {
+                ResourceBundle rb = ResourceBundle.getBundle("language/language_fr", Locale.getDefault());
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Log In Error");
+                alert.setHeaderText(rb.getString("Invalid") + " " + rb.getString("Username") + " " +
+                                rb.getString("or") + " " + rb.getString("Password"));
+                alert.showAndWait();
+                outputFile.println("Failed Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault() + ")");
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Log In Error");
+                alert.setHeaderText("Invalid Username or Password");
+                alert.showAndWait();
+                outputFile.println("Failed Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault() + ")");
+            }
         }
         outputFile.close();
     }
