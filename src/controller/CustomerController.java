@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.javafx.fxml.FXMLLoaderHelper;
 import database.AppointmentDao;
 import database.CustomerDao;
 import database.JDBC;
@@ -57,7 +58,25 @@ public class CustomerController implements Initializable {
         stage.show();
     }
 
-    public void onModifyCustomerButton(ActionEvent actionEvent) {
+    public void onModifyCustomerButton(ActionEvent actionEvent) throws IOException, SQLException {
+        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+        if(selectedCustomer != null) {
+            Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader =  new FXMLLoader(getClass().getResource("../view/ModifyCustomer.fxml"));
+            Parent parent = loader.load();
+            stage.setScene(new Scene(parent));
+            stage.show();
+
+            ModifyCustomerController modifyCustomerController = loader.getController();
+            modifyCustomerController.passCustomer(selectedCustomer);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Customer Selected");
+            alert.setContentText("Please select customer to modify.");
+            alert.showAndWait();
+        }
     }
 
     public void onDeleteCustomerButton(ActionEvent actionEvent) throws SQLException {

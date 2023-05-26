@@ -1,33 +1,110 @@
 package controller;
 
+import database.CountryDao;
+import database.CustomerDao;
+import database.DivisionDao;
+import database.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Country;
+import model.Customer;
+import model.Division;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class ModifyCustomerController {
+public class ModifyCustomerController implements Initializable {
     public TextField customerIdTextField;
     public TextField customerNameTextField;
     public TextField addressTextField;
     public TextField postalCodeTextField;
     public TextField phoneNumberTextField;
-    public ComboBox countryComboBox;
-    public ComboBox divisionComboBox;
+    public ComboBox<Country> countryComboBox;
+    public ComboBox<Division> divisionComboBox;
     public Button saveButton;
     public Button cancelButton;
+    private Customer passSelectedCustomer;
+    private int idIndex;
+    private int countryId;
+    private int divisionId;
 
-    public void onCountryComboBox(ActionEvent actionEvent) {
+    public void passCustomer(Customer selectedCustomer) throws SQLException {
+        passSelectedCustomer = selectedCustomer;
+        idIndex = CustomerDao.getAllCustomers().indexOf(passSelectedCustomer);
+
+        customerIdTextField.setText(String.valueOf(selectedCustomer.getCustomerId()));
+        customerNameTextField.setText(selectedCustomer.getCustomerName());
+        addressTextField.setText(selectedCustomer.getAddress());
+        postalCodeTextField.setText(selectedCustomer.getPostalCode());
+        phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
+
+        Country selectedCountry = null;
+        for(Country country: CountryDao.getAllCountries()) {
+            if(country.getCountryId() == selectedCustomer.getCountryId()) {
+                selectedCountry = country;
+                break;
+            }
+        }
+        countryComboBox.getSelectionModel().select(selectedCountry);
+        countryId = selectedCountry.getCountryId();
+//        countryComboBox.getSelectionModel().getSelectedItem();
+
+        Division selectedDivision = null;
+        for(Division division: DivisionDao.getDivisionsByCountry(countryId)) {
+            if(division.getDivisionId() == selectedCustomer.getDivisionId()) {
+                selectedDivision = division;
+                break;
+            }
+        }
+        divisionComboBox.getSelectionModel().select(selectedDivision);
+        divisionId = selectedDivision.getDivisionId();
+//        divisionComboBox.getSelectionModel().getSelectedItem();
     }
 
-    public void onDivisionComboBox(ActionEvent actionEvent) {
+    public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
+        countryId = countryComboBox.getValue().getCountryId();
+        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
+        divisionComboBox.getSelectionModel().selectFirst();
     }
 
-    public void onSaveButton(ActionEvent actionEvent) {
+    public void onSaveButton(ActionEvent actionEvent) throws SQLException, IOException {
+        int customerId = passSelectedCustomer.getCustomerId();
+        String customerName = customerNameTextField.getText();
+        String address = addressTextField.getText();
+        String postalCode = postalCodeTextField.getText();
+        String phoneNumber = phoneNumberTextField.getText();
+        String countryName = countryComboBox.getValue().getCountryName();
+        String divisionName = divisionComboBox.getValue().getDivisionName();
+
+        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phoneNumber.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Input field cannot be empty.");
+            alert.showAndWait();
+            return;
+        }
+
+        int divisionId = 0;
+        for(Division division: DivisionDao.getAllDivisions()) {
+            if(division.getDivisionName().equals(divisionName)) {
+                divisionId = division.getDivisionId();
+            }
+        }
+        CustomerDao customerDao = new CustomerDao();
+        customerDao.addCustomer(Customer.getAutoCustomerId(), customerName, address, postalCode, phoneNumber, divisionId);
+
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Customer.fxml"));
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void onCancelButton(ActionEvent actionEvent) throws IOException {
@@ -40,6 +117,20 @@ public class ModifyCustomerController {
             Parent parent = FXMLLoader.load(getClass().getResource("../view/Customer.fxml"));
             stage.setScene(new Scene(parent));
             stage.show();
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            JDBC.makeConnection();
+            countryComboBox.setItems(CountryDao.getAllCountries());
+            countryComboBox.getSelectionModel().getSelectedItem();
+            countryId = countryComboBox.getValue().getCountryId();
+            divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
+            divisionComboBox.getSelectionModel().getSelectedItem();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }

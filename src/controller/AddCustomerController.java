@@ -4,7 +4,6 @@ import database.CountryDao;
 import database.CustomerDao;
 import database.DivisionDao;
 import database.JDBC;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,12 +31,6 @@ public class AddCustomerController implements Initializable {
     public Button saveButton;
     public Button cancelButton;
     private int countryId;
-    public String customerName;
-    public String address;
-    public String postalCode;
-    public String phoneNumber;
-    public String countryName;
-    public String divisionName;
 
     public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
         countryId = countryComboBox.getValue().getCountryId();
@@ -46,12 +39,12 @@ public class AddCustomerController implements Initializable {
     }
 
     public void onSaveButton(ActionEvent actionEvent) throws SQLException, IOException {
-        customerName = customerNameTextField.getText();
-        address = addressTextField.getText();
-        postalCode = postalCodeTextField.getText();
-        phoneNumber = phoneNumberTextField.getText();
-        countryName = countryComboBox.getValue().getCountryName();
-        divisionName = divisionComboBox.getValue().getDivisionName();
+        String customerName = customerNameTextField.getText();
+        String address = addressTextField.getText();
+        String postalCode = postalCodeTextField.getText();
+        String phoneNumber = phoneNumberTextField.getText();
+        String countryName = countryComboBox.getValue().getCountryName();
+        String divisionName = divisionComboBox.getValue().getDivisionName();
 
         if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phoneNumber.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
