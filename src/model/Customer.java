@@ -150,7 +150,7 @@ public class Customer {
         this.countryName = countryName;
     }
 
-    public static int getAutoId(){
+    public static int getAutoCustomerId(){
         return autoCustomerId++;
     }
 }

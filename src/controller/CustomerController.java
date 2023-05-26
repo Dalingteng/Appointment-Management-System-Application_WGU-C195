@@ -1,5 +1,6 @@
 package controller;
 
+import database.AppointmentDao;
 import database.CustomerDao;
 import database.JDBC;
 import javafx.event.ActionEvent;
@@ -11,9 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Customer;
-
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -59,7 +60,38 @@ public class CustomerController implements Initializable {
     public void onModifyCustomerButton(ActionEvent actionEvent) {
     }
 
-    public void onDeleteCustomerButton(ActionEvent actionEvent) {
+    public void onDeleteCustomerButton(ActionEvent actionEvent) throws SQLException {
+        JDBC.makeConnection();
+        Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
+        int customerId = selectedCustomer.getCustomerId();
+        String customerName = selectedCustomer.getCustomerName();
+
+        if(selectedCustomer != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setHeaderText("Are you sure you want to delete?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(!AppointmentDao.getAppointmentsByCustomer(customerId).isEmpty()) {
+                Alert alertError = new Alert(Alert.AlertType.ERROR);
+                alertError.setTitle("Error");
+                alertError.setHeaderText("Unable to delete customer");
+                alertError.setContentText("All customer's appointments must be deleted first before continue.");
+                alertError.showAndWait();
+            }
+            else {
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    CustomerDao.deleteCustomer(customerId, customerName);
+                    customerTable.setItems(CustomerDao.getAllCustomers());
+                }
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Customer Selected");
+            alert.setContentText("Please select customer to delete.");
+            alert.showAndWait();
+        }
     }
 
     @Override

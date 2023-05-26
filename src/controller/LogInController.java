@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.User;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,6 +63,7 @@ public class LogInController implements Initializable {
                         }
                     }
                 }
+
                 if(upcomingAppointments.isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Upcoming Appointments Alert");
@@ -76,7 +76,7 @@ public class LogInController implements Initializable {
                     for(Appointment a: upcomingAppointments) {
                         reminder = ("Appointment ID: " + a.getAppointmentId() + " , Date & Time: " + a.getStartDate() + " (" + a.getStartTime() + ")\n") + reminder;
                     }
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Upcoming Appointments Alert");
                     alert.setHeaderText("Upcoming Appointments Reminder");
                     alert.setContentText(reminder);
@@ -85,12 +85,13 @@ public class LogInController implements Initializable {
                 break;
             }
         }
+
         if(validUser) {
             Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
             Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
             stage.setScene(new Scene(parent));
             stage.show();
-            outputFile.println("Successful Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
+            outputFile.println("User: [" + username + "] is successfully logged in at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
         }
         else {
             if (Locale.getDefault().getLanguage().equals("fr")) {
@@ -100,14 +101,14 @@ public class LogInController implements Initializable {
                 alert.setHeaderText(rb.getString("Invalid") + " " + rb.getString("Username") + " " +
                                 rb.getString("or") + " " + rb.getString("Password"));
                 alert.showAndWait();
-                outputFile.println("Failed Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault() + ")");
+                outputFile.println("User: [" + username + "] is failed to log in at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Log In Error");
                 alert.setHeaderText("Invalid Username or Password");
                 alert.showAndWait();
-                outputFile.println("Failed Log In Attempt - user: " + username + ", at " + LocalDateTime.now() + " (" + ZoneId.systemDefault() + ")");
+                outputFile.println("User: [" + username + "] is failed to log in at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");
             }
         }
         outputFile.close();

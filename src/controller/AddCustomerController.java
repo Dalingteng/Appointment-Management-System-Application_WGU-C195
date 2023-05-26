@@ -1,8 +1,10 @@
 package controller;
 
 import database.CountryDao;
+import database.CustomerDao;
 import database.DivisionDao;
 import database.JDBC;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Country;
+import model.Customer;
 import model.Division;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +45,7 @@ public class AddCustomerController implements Initializable {
         divisionComboBox.getSelectionModel().selectFirst();
     }
 
-    public void onSaveButton(ActionEvent actionEvent) {
+    public void onSaveButton(ActionEvent actionEvent) throws SQLException, IOException {
         customerName = customerNameTextField.getText();
         address = addressTextField.getText();
         postalCode = postalCodeTextField.getText();
@@ -50,10 +53,27 @@ public class AddCustomerController implements Initializable {
         countryName = countryComboBox.getValue().getCountryName();
         divisionName = divisionComboBox.getValue().getDivisionName();
 
-        if(customerName.isEmpty()) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phoneNumber.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Input field cannot be empty.");
+            alert.showAndWait();
+            return;
         }
 
+        int divisionId = 0;
+        for(Division division: DivisionDao.getAllDivisions()) {
+            if(division.getDivisionName().equals(divisionName)) {
+                divisionId = division.getDivisionId();
+            }
+        }
+        CustomerDao customerDao = new CustomerDao();
+        customerDao.addCustomer(Customer.getAutoCustomerId(), customerName, address, postalCode, phoneNumber, divisionId);
+
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Customer.fxml"));
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void onCancelButton(ActionEvent actionEvent) throws IOException {
