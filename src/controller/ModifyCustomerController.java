@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
 import model.Division;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,7 +44,15 @@ public class ModifyCustomerController implements Initializable {
         addressTextField.setText(selectedCustomer.getAddress());
         postalCodeTextField.setText(selectedCustomer.getPostalCode());
         phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
+//        countryComboBox.getValue().getCountryName();
+//        divisionComboBox.getValue().getDivisionName();
 
+//        Country selectedCountry = countryComboBox.getSelectionModel().getSelectedItem();
+//        countryId = selectedCountry.getCountryId();
+//        countryComboBox.getValue().getCountryName();
+//        Division selectedDivision = divisionComboBox.getSelectionModel().getSelectedItem();
+//        divisionId = selectedDivision.getDivisionId();
+//        divisionComboBox.getValue().getDivisionName();
         Country selectedCountry = null;
         for(Country country: CountryDao.getAllCountries()) {
             if(country.getCountryId() == selectedCustomer.getCountryId()) {
@@ -55,7 +62,7 @@ public class ModifyCustomerController implements Initializable {
         }
         countryComboBox.getSelectionModel().select(selectedCountry);
         countryId = selectedCountry.getCountryId();
-//        countryComboBox.getSelectionModel().getSelectedItem();
+//        countryComboBox.getValue().getCountryName();
 
         Division selectedDivision = null;
         for(Division division: DivisionDao.getDivisionsByCountry(countryId)) {
@@ -66,7 +73,7 @@ public class ModifyCustomerController implements Initializable {
         }
         divisionComboBox.getSelectionModel().select(selectedDivision);
         divisionId = selectedDivision.getDivisionId();
-//        divisionComboBox.getSelectionModel().getSelectedItem();
+//        divisionComboBox.setValue(selectedDivision);
     }
 
     public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
@@ -126,7 +133,6 @@ public class ModifyCustomerController implements Initializable {
             JDBC.makeConnection();
             countryComboBox.setItems(CountryDao.getAllCountries());
             countryComboBox.getSelectionModel().getSelectedItem();
-            countryId = countryComboBox.getValue().getCountryId();
             divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
             divisionComboBox.getSelectionModel().getSelectedItem();
         } catch (Exception e) {

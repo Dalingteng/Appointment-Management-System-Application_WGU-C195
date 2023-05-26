@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.javafx.fxml.FXMLLoaderHelper;
 import database.AppointmentDao;
 import database.CustomerDao;
 import database.JDBC;

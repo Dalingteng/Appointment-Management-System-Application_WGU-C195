@@ -1,6 +1,7 @@
 package controller;
 
 import database.AppointmentDao;
+import database.CustomerDao;
 import database.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -88,6 +90,8 @@ public class AppointmentController implements Initializable {
     }
 
     public void onDeleteAppointmentButton(ActionEvent actionEvent) {
+        JDBC.makeConnection();
+        Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Appointment {
     private int customerId;
     private int userId;
     private int contactId;
+    private static int autoAppointmentId = 1;
 
     public Appointment(int appointmentId, String title, String description, String location, String type,
                        LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
@@ -187,5 +188,9 @@ public class Appointment {
 
     public void setContactId(int contactId) {
         this.contactId = contactId;
+    }
+
+    public static int getAutoAppointmentId(){
+        return autoAppointmentId++;
     }
 }
