@@ -1,6 +1,8 @@
 package controller;
 
+import database.AppointmentDao;
 import database.UserDao;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +11,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.User;
+
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
-import java.time.ZoneId;
+import java.sql.SQLException;
+import java.time.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -28,13 +35,56 @@ public class LogInController implements Initializable {
     public Button cancelButton;
     static ObservableList<User> users;
 
-    public void onLogInButton(ActionEvent actionEvent) throws IOException {
+    public void onLogInButton(ActionEvent actionEvent) throws IOException, SQLException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         boolean validUser = false;
+
+        FileWriter fileWriter = new FileWriter("login_activity.txt", true);
+        PrintWriter outputFile = new PrintWriter(fileWriter);
+
         for(User u: users) {
             if(u.getUserName().equals(username) && u.getPassword().equals(password)) {
                 validUser = true;
+                User user = new User(u.getUserId(), username, password);
+                ObservableList<Appointment> allAppointments = AppointmentDao.getAllAppointments();
+                ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
+
+                LocalDateTime localNow = LocalDateTime.now();
+                ZonedDateTime now = localNow.atZone(ZoneId.systemDefault());
+                ZonedDateTime next15 = now.plusMinutes(15);
+
+                for(Appointment appointment: allAppointments) {
+                    LocalDate startDate = appointment.getStartDate();
+                    LocalTime startTime = appointment.getStartTime();
+                    ZonedDateTime appointmentTime = startTime.atDate(startDate).atZone(ZoneId.systemDefault());
+                    if(user.getUserId() == appointment.getUserId()) {
+                        if(appointmentTime.isAfter(now) && appointmentTime.isBefore(next15)) {
+                            upcomingAppointments.add(appointment);
+                        }
+                    }
+                }
+                if(upcomingAppointments.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("No Upcoming Appointments");
+                    alert.setHeaderText("No Upcoming Appointments");
+                    alert.setContentText("There is no appointments within the next 15 minutes.");
+                    alert.showAndWait();
+                }
+                else {
+                    String reminder = "";
+                    for(Appointment a: upcomingAppointments) {
+                        reminder = ("Appointment ID: " + a.getAppointmentId() + " , Date & Time: " + a.getStartDate() + " (" + a.getStartTime() + ")\n") + reminder;
+                    }
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Upcoming Appointments");
+                    alert.setHeaderText("Upcoming Appointments Reminder");
+                    alert.setContentText(reminder);
+                    alert.showAndWait();
+                }
+
+
+
                 //get the userID
                 //get all appointments
                 //for all appointments, check if userId matches
