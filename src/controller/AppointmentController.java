@@ -89,9 +89,29 @@ public class AppointmentController implements Initializable {
     public void onModifyAppointmentButton(ActionEvent actionEvent) {
     }
 
-    public void onDeleteAppointmentButton(ActionEvent actionEvent) {
+    public void onDeleteAppointmentButton(ActionEvent actionEvent) throws SQLException {
         JDBC.makeConnection();
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+        int appointmentId = selectedAppointment.getAppointmentId();
+        String type = selectedAppointment.getType();
+
+        if(selectedAppointment != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setHeaderText("Are you sure you want to delete?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.OK) {
+                AppointmentDao.deleteAppointment(appointmentId, type);
+                appointmentTable.setItems(AppointmentDao.getAllAppointments());
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Appointment Selected");
+            alert.setContentText("Please select appointment to delete.");
+            alert.showAndWait();
+        }
     }
 
     @Override
