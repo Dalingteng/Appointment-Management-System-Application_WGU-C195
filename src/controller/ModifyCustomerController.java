@@ -1,9 +1,6 @@
 package controller;
 
-import database.CountryDao;
-import database.CustomerDao;
-import database.DivisionDao;
-import database.JDBC;
+import database.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,6 +42,11 @@ public class ModifyCustomerController implements Initializable {
         addressTextField.setText(selectedCustomer.getAddress());
         postalCodeTextField.setText(selectedCustomer.getPostalCode());
         phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
+//
+//        countryComboBox.setItems(CountryDao.getAllCountries());
+//        countryComboBox.getSelectionModel().select(selectedCustomer.getCountryId());
+//        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(selectedCustomer.getCountryId()));
+//        divisionComboBox.getSelectionModel().select(selectedCustomer.getDivisionId());
 
         Country selectedCountry = null;
         for(Country country: CountryDao.getAllCountries()) {
@@ -56,7 +58,7 @@ public class ModifyCustomerController implements Initializable {
         countryComboBox.getSelectionModel().select(selectedCountry);
         countryId = selectedCountry.getCountryId();
 
-//        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
+        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
         Division selectedDivision = null;
         for(Division division: DivisionDao.getDivisionsByCountry(countryId)) {
             if(division.getDivisionName().equals(selectedCustomer.getDivisionName())) {
@@ -68,7 +70,6 @@ public class ModifyCustomerController implements Initializable {
         divisionId = selectedDivision.getDivisionId();
 //        divisionComboBox.setValue(selectedDivision);
 //        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
-
 //        countryComboBox.getSelectionModel().getSelectedItem();
 //        divisionComboBox.getSelectionModel().getSelectedItem();
     }

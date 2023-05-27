@@ -6,6 +6,7 @@ import model.Appointment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -86,5 +87,53 @@ public class AppointmentDao {
             appointmentsByContact.add(new Appointment(appointmentId, title, description, location, type, startDate, endDate, startTime, endTime, customerId, userId, contactId));
         }
         return appointmentsByContact;
+    }
+
+    public int addAppointment(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int customerId, int userId, int contactId) throws SQLException {
+        String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) " +
+                "VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, appointmentId);
+        ps.setString(2, title);
+        ps.setString(3, description);
+        ps.setString(4, location);
+        ps.setString(5, type);
+        ps.setTimestamp(6, Timestamp.valueOf(startDateTime));
+        ps.setTimestamp(7, Timestamp.valueOf(endDateTime));
+        ps.setInt(8, customerId);
+        ps.setInt(9, userId);
+        ps.setInt(10, contactId);
+        int rowsAffected = ps.executeUpdate();
+        if(rowsAffected > 0) {
+            System.out.println("Add Successful!");
+        }
+        else {
+            System.out.println("Add Failed!");
+        }
+        return rowsAffected;
+    }
+
+    public int Appointment(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int customerId, int userId, int contactId) throws SQLException {
+        String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ?" +
+                "WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, appointmentId);
+        ps.setString(2, title);
+        ps.setString(3, description);
+        ps.setString(4, location);
+        ps.setString(5, type);
+        ps.setTimestamp(6, Timestamp.valueOf(startDateTime));
+        ps.setTimestamp(7, Timestamp.valueOf(endDateTime));
+        ps.setInt(8, customerId);
+        ps.setInt(9, userId);
+        ps.setInt(10, contactId);
+        int rowsAffected = ps.executeUpdate();
+        if(rowsAffected > 0) {
+            System.out.println("Update Successful!");
+        }
+        else {
+            System.out.println("Update Failed!");
+        }
+        return rowsAffected;
     }
 }
