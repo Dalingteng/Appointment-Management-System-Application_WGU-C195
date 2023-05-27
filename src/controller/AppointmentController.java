@@ -109,7 +109,7 @@ public class AppointmentController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No Appointment Selected");
-            alert.setContentText("Please select appointment to delete.");
+            alert.setContentText("Please select an appointment to delete.");
             alert.showAndWait();
         }
     }

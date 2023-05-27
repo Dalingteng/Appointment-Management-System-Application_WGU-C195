@@ -68,7 +68,7 @@ public class LogInController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Upcoming Appointments Alert");
                     alert.setHeaderText("No Upcoming Appointments");
-                    alert.setContentText("There is no appointments within the next 15 minutes.");
+                    alert.setContentText("There is no appointment within the next 15 minutes.");
                     alert.showAndWait();
                 }
                 else {
