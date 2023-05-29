@@ -42,11 +42,6 @@ public class ModifyCustomerController implements Initializable {
         addressTextField.setText(selectedCustomer.getAddress());
         postalCodeTextField.setText(selectedCustomer.getPostalCode());
         phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
-//
-//        countryComboBox.setItems(CountryDao.getAllCountries());
-//        countryComboBox.getSelectionModel().select(selectedCustomer.getCountryId());
-//        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(selectedCustomer.getCountryId()));
-//        divisionComboBox.getSelectionModel().select(selectedCustomer.getDivisionId());
 
         Country selectedCountry = null;
         for(Country country: CountryDao.getAllCountries()) {
@@ -68,10 +63,6 @@ public class ModifyCustomerController implements Initializable {
         }
         divisionComboBox.getSelectionModel().select(selectedDivision);
         divisionId = selectedDivision.getDivisionId();
-//        divisionComboBox.setValue(selectedDivision);
-//        divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
-//        countryComboBox.getSelectionModel().getSelectedItem();
-//        divisionComboBox.getSelectionModel().getSelectedItem();
     }
 
     public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
@@ -92,7 +83,8 @@ public class ModifyCustomerController implements Initializable {
         if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phoneNumber.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Input Error");
-            alert.setHeaderText("Input field cannot be empty.");
+            alert.setHeaderText("Text field cannot be empty");
+            alert.setContentText("Please fill out all empty fields to save.");
             alert.showAndWait();
             return;
         }
@@ -103,8 +95,9 @@ public class ModifyCustomerController implements Initializable {
                 divisionId = division.getDivisionId();
             }
         }
+
         CustomerDao customerDao = new CustomerDao();
-        customerDao.addCustomer(Customer.getAutoCustomerId(), customerName, address, postalCode, phoneNumber, divisionId);
+        customerDao.updateCustomer(customerId, customerName, address, postalCode, phoneNumber, divisionId);
 
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../view/Customer.fxml"));

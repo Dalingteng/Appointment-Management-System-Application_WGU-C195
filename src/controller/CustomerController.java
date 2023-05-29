@@ -73,7 +73,7 @@ public class CustomerController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No Customer Selected");
-            alert.setContentText("Please select customer to modify.");
+            alert.setContentText("Please select a customer to modify.");
             alert.showAndWait();
         }
     }

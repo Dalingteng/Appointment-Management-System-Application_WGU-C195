@@ -49,7 +49,8 @@ public class AddCustomerController implements Initializable {
         if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phoneNumber.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Input Error");
-            alert.setHeaderText("Input field cannot be empty.");
+            alert.setHeaderText("Text field cannot be empty");
+            alert.setContentText("Please fill out all empty fields to save.");
             alert.showAndWait();
             return;
         }

@@ -49,7 +49,7 @@ public class CustomerDao {
     }
 
     public int updateCustomer(int customerId, String customerName, String address, String postalCode, String phoneNumber, int divisionId) throws SQLException {
-        String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ?" +
+        String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? " +
                 "WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setString(1, customerName);
