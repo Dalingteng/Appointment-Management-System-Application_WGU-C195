@@ -1,5 +1,9 @@
 package controller;
 
+import database.ContactDao;
+import database.CustomerDao;
+import database.JDBC;
+import database.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -62,6 +66,16 @@ public class AddAppointmentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            JDBC.makeConnection();
+            contactIdComboBox.setItems(ContactDao.getAllContacts());
+            contactIdComboBox.getSelectionModel().selectFirst();
+            customerIdComboBox.setItems(CustomerDao.getAllCustomers());
+            customerIdComboBox.getSelectionModel().selectFirst();
+            userIdComboBox.setItems(UserDao.getAllUsers());
+            userIdComboBox.getSelectionModel().selectFirst();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
