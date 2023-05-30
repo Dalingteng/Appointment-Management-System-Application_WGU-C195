@@ -6,8 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Contact;
+import model.Customer;
+import model.User;
 
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.Optional;
 
 public class ModifyAppointmentController {
@@ -16,13 +20,13 @@ public class ModifyAppointmentController {
     public TextField descriptionTextField;
     public TextField locationTextField;
     public TextField typeTextField;
-    public ComboBox contactComboBox;
-    public ComboBox customerIdComboBox;
-    public ComboBox userIdComboBox;
+    public ComboBox<Contact> contactComboBox;
+    public ComboBox<Customer> customerIdComboBox;
+    public ComboBox<User> userIdComboBox;
     public DatePicker startDatePicker;
     public DatePicker endDatePicker;
-    public ComboBox startTimeComboBox;
-    public ComboBox endTimeComboBox;
+    public ComboBox<LocalTime> startTimeComboBox;
+    public ComboBox<LocalTime> endTimeComboBox;
     public Button saveButton;
     public Button cancelButton;
 
