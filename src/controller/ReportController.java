@@ -86,9 +86,7 @@ public class ReportController implements Initializable {
             customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
             contactIdComboBox.setItems(ContactDao.getAllContacts());
-            contactIdComboBox.getSelectionModel().selectFirst();
-//            int contactId = contactIdComboBox.getSelectionModel().getSelectedItem().getContactId();
-//            reportContactTable.setItems(AppointmentDao.getAppointmentsByContact(contactId));
+            reportContactTable.setItems(AppointmentDao.getAllAppointments());
 
             reportMonthColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
             reportTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
