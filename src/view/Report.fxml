@@ -41,8 +41,8 @@
          </font></Label>
       <TableView fx:id="reportMonthTypeTable" layoutX="29.0" layoutY="388.0" prefHeight="175.0" prefWidth="375.0">
         <columns>
-          <TableColumn fx:id="appointmentMonthColumn" prefWidth="125.0" text="Month" />
-          <TableColumn fx:id="appointmentTypeColumn" prefWidth="125.0" text="Type" />
+          <TableColumn fx:id="reportMonthColumn" prefWidth="125.0" text="Month" />
+          <TableColumn fx:id="reportTypeColumn" prefWidth="125.0" text="Type" />
           <TableColumn fx:id="countMonthTypeColumn" prefWidth="125.0" text="Count" />
         </columns>
       </TableView>
@@ -52,7 +52,7 @@
          </font></Label>
       <TableView fx:id="reportCountryTable" layoutX="453.0" layoutY="388.0" prefHeight="175.0" prefWidth="300.0">
          <columns>
-            <TableColumn fx:id="appointmentCountryColumn" prefWidth="150.0" text="Country" />
+            <TableColumn fx:id="reportCountryColumn" prefWidth="150.0" text="Country" />
             <TableColumn fx:id="countCountryColumn" prefWidth="150.0" text="Count" />
          </columns>
       </TableView>

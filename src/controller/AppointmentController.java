@@ -1,7 +1,6 @@
 package controller;
 
 import database.AppointmentDao;
-import database.CustomerDao;
 import database.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
