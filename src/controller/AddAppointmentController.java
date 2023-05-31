@@ -144,8 +144,10 @@ public class AddAppointmentController implements Initializable {
             ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
             ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
 
-            LocalTime time = LocalTime.MIN;
-            while(!time.equals(LocalTime.MAX)){
+//            LocalTime time = LocalTime.MIN;
+            LocalTime time = LocalTime.of(0, 0);
+//            while(!time.equals(LocalTime.MAX)){
+            while(!time.equals(LocalTime.of(23, 30))) {
                 startTimeList.add(time);
                 endTimeList.add(time);
                 time = time.plusMinutes(30);
@@ -154,7 +156,7 @@ public class AddAppointmentController implements Initializable {
             endTimeList.remove(0);
 
             startTimeComboBox.setItems(startTimeList);
-            startTimeComboBox.getSelectionModel().select(LocalTime.MIN);
+            startTimeComboBox.getSelectionModel().select(LocalTime.of(0, 0));
             endTimeComboBox.setItems(endTimeList);
             endTimeComboBox.getSelectionModel().select(LocalTime.of(0, 30));
 
