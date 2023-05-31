@@ -1,9 +1,8 @@
 package controller;
 
-import database.ContactDao;
-import database.CustomerDao;
-import database.JDBC;
-import database.UserDao;
+import database.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,13 +10,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -37,7 +40,7 @@ public class AddAppointmentController implements Initializable {
     public Button saveButton;
     public Button cancelButton;
 
-    public void onSaveButton(ActionEvent actionEvent) {
+    public void onSaveButton(ActionEvent actionEvent) throws SQLException, IOException {
         String title = titleTextField.getText();
         String description = descriptionTextField.getText();
         String location = locationTextField.getText();
@@ -47,8 +50,18 @@ public class AddAppointmentController implements Initializable {
         int userId = userIdComboBox.getSelectionModel().getSelectedItem().getUserId();
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
+        LocalTime startTime = startTimeComboBox.getSelectionModel().getSelectedItem();
+        LocalTime endTime = endTimeComboBox.getSelectionModel().getSelectedItem();
+        LocalDateTime startDateTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startTime.getHour(), startTime.getMinute());
+        LocalDateTime endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endTime.getHour(), endTime.getMinute());
 
+        AppointmentDao appointmentDao = new AppointmentDao();
+        appointmentDao.addAppointment(Appointment.getAutoAppointmentId(), title, description, location, type, startDateTime, endDateTime, customerId, userId, contactId);
 
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void onCancelButton(ActionEvent actionEvent) throws IOException {
@@ -74,6 +87,26 @@ public class AddAppointmentController implements Initializable {
             customerIdComboBox.getSelectionModel().selectFirst();
             userIdComboBox.setItems(UserDao.getAllUsers());
             userIdComboBox.getSelectionModel().selectFirst();
+            startDatePicker.setValue(LocalDate.now());
+            endDatePicker.setValue(LocalDate.now());
+
+            ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
+            ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
+
+            LocalTime time = LocalTime.of(8,0);
+            while(!time.equals(LocalTime.of(22,30))) {
+                startTimeList.add(time);
+                endTimeList.add(time);
+                time = time.plusMinutes(30);
+            }
+            startTimeList.remove(startTimeList.size() - 1);
+            endTimeList.remove(0);
+
+            startTimeComboBox.setItems(startTimeList);
+            startTimeComboBox.getSelectionModel().select(LocalTime.of(8,0));
+            endTimeComboBox.setItems(endTimeList);
+            endTimeComboBox.getSelectionModel().select(LocalTime.of(8, 30));
+
 
             //Get the start date from datepicker
             //Get the start time from timeComboBox
@@ -86,9 +119,6 @@ public class AddAppointmentController implements Initializable {
             //check must be in business hour
             //check not to overlap with existing appointment
             //using for loop
-
-            //appointment ID - disabled
-
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
