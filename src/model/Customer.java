@@ -156,4 +156,9 @@ public class Customer {
     public static int getAutoCustomerId(){
         return autoCustomerId++;
     }
+
+    @Override
+    public String toString() {
+        return "(" + customerId + ") " + customerName;
+    }
 }

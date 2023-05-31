@@ -27,7 +27,7 @@
       <Label layoutX="333.0" layoutY="319.0" text="End Date" />
       <Label layoutX="55.0" layoutY="349.0" text="Start Time" />
       <Label layoutX="333.0" layoutY="349.0" text="End Time" />
-      <TextField fx:id="appointmentIdTextField" layoutX="156.0" layoutY="75.0" />
+      <TextField fx:id="appointmentIdTextField" editable="false" layoutX="156.0" layoutY="75.0" />
       <TextField fx:id="titleTextField" layoutX="156.0" layoutY="105.0" />
       <TextField fx:id="descriptionTextField" layoutX="156.0" layoutY="135.0" />
       <TextField fx:id="locationTextField" layoutX="156.0" layoutY="165.0" />

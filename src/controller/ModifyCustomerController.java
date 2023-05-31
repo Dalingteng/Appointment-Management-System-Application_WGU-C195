@@ -73,11 +73,35 @@ public class ModifyCustomerController implements Initializable {
         String countryName = countryComboBox.getValue().getCountryName();
         String divisionName = divisionComboBox.getValue().getDivisionName();
 
-        if(customerName.isEmpty() || address.isEmpty() || postalCode.isEmpty() || phoneNumber.isEmpty()) {
+        if(customerName.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Input Error");
-            alert.setHeaderText("Text field cannot be empty");
-            alert.setContentText("Please fill out all empty fields to save.");
+            alert.setHeaderText("Field cannot be empty");
+            alert.setContentText("Please fill out 'Customer Name' field.");
+            alert.showAndWait();
+            return;
+        }
+        if(address.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Field cannot be empty");
+            alert.setContentText("Please fill out 'Address' field.");
+            alert.showAndWait();
+            return;
+        }
+        if(postalCode.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Field cannot be empty");
+            alert.setContentText("Please fill out 'Postal Code' field.");
+            alert.showAndWait();
+            return;
+        }
+        if(phoneNumber.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Field cannot be empty");
+            alert.setContentText("Please fill out 'Phone Number' field.");
             alert.showAndWait();
             return;
         }
