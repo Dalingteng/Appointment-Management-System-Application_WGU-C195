@@ -17,9 +17,8 @@ import model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Timestamp;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -54,6 +53,14 @@ public class AddAppointmentController implements Initializable {
         LocalTime endTime = endTimeComboBox.getSelectionModel().getSelectedItem();
         LocalDateTime startDateTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startTime.getHour(), startTime.getMinute());
         LocalDateTime endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endTime.getHour(), endTime.getMinute());
+        System.out.println("LocalStartDT: " + startDateTime);
+        System.out.println("LocalEndDT: " + endDateTime);
+
+        //Convert to EST
+        ZonedDateTime businessStartDateTime = startDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime businessEndDateTime = endDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
+        System.out.println("Start EST: " + businessStartDateTime);
+        System.out.println("End EST: " + businessEndDateTime);
 
         AppointmentDao appointmentDao = new AppointmentDao();
         appointmentDao.addAppointment(Appointment.getAutoAppointmentId(), title, description, location, type, startDateTime, endDateTime, customerId, userId, contactId);
@@ -93,8 +100,8 @@ public class AddAppointmentController implements Initializable {
             ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
             ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
 
-            LocalTime time = LocalTime.of(8,0);
-            while(!time.equals(LocalTime.of(22,30))) {
+            LocalTime time = LocalTime.of(8, 0);
+            while(!time.equals(LocalTime.of(22, 30))) {
                 startTimeList.add(time);
                 endTimeList.add(time);
                 time = time.plusMinutes(30);
@@ -103,7 +110,7 @@ public class AddAppointmentController implements Initializable {
             endTimeList.remove(0);
 
             startTimeComboBox.setItems(startTimeList);
-            startTimeComboBox.getSelectionModel().select(LocalTime.of(8,0));
+            startTimeComboBox.getSelectionModel().select(LocalTime.of(8, 0));
             endTimeComboBox.setItems(endTimeList);
             endTimeComboBox.getSelectionModel().select(LocalTime.of(8, 30));
 
