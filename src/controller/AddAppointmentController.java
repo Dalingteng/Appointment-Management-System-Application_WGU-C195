@@ -74,6 +74,21 @@ public class AddAppointmentController implements Initializable {
             customerIdComboBox.getSelectionModel().selectFirst();
             userIdComboBox.setItems(UserDao.getAllUsers());
             userIdComboBox.getSelectionModel().selectFirst();
+
+            //Get the start date from datepicker
+            //Get the start time from timeComboBox
+            //Convert to string DateTimeFormatter
+            //Then convert to LocalDateTime
+            //insert to database using Timestamp.valueOf(LocalDateTime)
+            //convert to EST to check for business hour using ZonedDateTime
+            //alert if the appointment collides with the existing appointment
+
+            //check must be in business hour
+            //check not to overlap with existing appointment
+            //using for loop
+
+            //appointment ID - disabled
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
