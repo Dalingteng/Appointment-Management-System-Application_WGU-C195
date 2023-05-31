@@ -53,14 +53,58 @@ public class AddAppointmentController implements Initializable {
         LocalTime endTime = endTimeComboBox.getSelectionModel().getSelectedItem();
         LocalDateTime startDateTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startTime.getHour(), startTime.getMinute());
         LocalDateTime endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endTime.getHour(), endTime.getMinute());
-        System.out.println("LocalStartDT: " + startDateTime);
-        System.out.println("LocalEndDT: " + endDateTime);
+//        System.out.println("LocalStartDT: " + startDateTime);
+//        System.out.println("LocalEndDT: " + endDateTime);
 
         //Convert to EST
-        ZonedDateTime businessStartDateTime = startDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
-        ZonedDateTime businessEndDateTime = endDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
-        System.out.println("Start EST: " + businessStartDateTime);
-        System.out.println("End EST: " + businessEndDateTime);
+        ZonedDateTime estStartDateTime = startDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime estEndDateTime = endDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
+//        System.out.println("Start EST: " + businessStartDateTime);
+//        System.out.println("End EST: " + businessEndDateTime);
+
+        LocalTime appointmentStartTime = estStartDateTime.toLocalTime();
+        LocalTime appointmentEndTime = estEndDateTime.toLocalTime();
+
+        int startDay = estStartDateTime.toLocalDate().getDayOfWeek().getValue();
+        int endDay = estEndDateTime.toLocalDate().getDayOfWeek().getValue();
+
+        int monday = DayOfWeek.MONDAY.getValue();
+        int friday = DayOfWeek.FRIDAY.getValue();
+
+        if(startDay < monday || startDay > friday || endDay < monday || endDay > friday) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Appointment day is not in business operations (Monday - Friday).");
+            alert.showAndWait();
+            return;
+        }
+
+        LocalTime businessStartTime = LocalTime.of(8, 0);
+        LocalTime businessEndTime = LocalTime.of(22, 0);
+
+        if(appointmentStartTime.isBefore(businessStartTime) || appointmentStartTime.isAfter(businessEndTime) || appointmentEndTime.isBefore(businessStartTime) || appointmentEndTime.isAfter(businessEndTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Appointment time (" + appointmentStartTime + "-" + appointmentEndTime + " EST) is not in business hours (8:00-22:00 EST).");
+            alert.showAndWait();
+            return;
+        }
+
+        if(startTime.isAfter(endTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Start Time cannot be after End Time.");
+            alert.showAndWait();
+            return;
+        }
+
+        if(startTime.equals(endTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Start Time and End Time cannot be the same.");
+            alert.showAndWait();
+            return;
+        }
+
+//        for(Appointment a: AppointmentDao.getAppointmentsByCustomer(customerId)) {
+//
+//        }
 
         AppointmentDao appointmentDao = new AppointmentDao();
         appointmentDao.addAppointment(Appointment.getAutoAppointmentId(), title, description, location, type, startDateTime, endDateTime, customerId, userId, contactId);
@@ -100,8 +144,8 @@ public class AddAppointmentController implements Initializable {
             ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
             ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
 
-            LocalTime time = LocalTime.of(8, 0);
-            while(!time.equals(LocalTime.of(22, 30))) {
+            LocalTime time = LocalTime.MIN;
+            while(!time.equals(LocalTime.MAX)){
                 startTimeList.add(time);
                 endTimeList.add(time);
                 time = time.plusMinutes(30);
@@ -110,9 +154,9 @@ public class AddAppointmentController implements Initializable {
             endTimeList.remove(0);
 
             startTimeComboBox.setItems(startTimeList);
-            startTimeComboBox.getSelectionModel().select(LocalTime.of(8, 0));
+            startTimeComboBox.getSelectionModel().select(LocalTime.MIN);
             endTimeComboBox.setItems(endTimeList);
-            endTimeComboBox.getSelectionModel().select(LocalTime.of(8, 30));
+            endTimeComboBox.getSelectionModel().select(LocalTime.of(0, 30));
 
 
             //Get the start date from datepicker
