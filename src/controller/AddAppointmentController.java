@@ -90,14 +90,14 @@ public class AddAppointmentController implements Initializable {
 
         if(startTime.isAfter(endTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Start Time cannot be after End Time.");
+            alert.setContentText("Appointment has start time after end time.");
             alert.showAndWait();
             return;
         }
 
         if(startTime.equals(endTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Start Time and End Time cannot be the same.");
+            alert.setContentText("Appointment has the same start time and end time.");
             alert.showAndWait();
             return;
         }
