@@ -32,7 +32,7 @@ public class LogInController implements Initializable {
     public Button logInButton;
     public Button resetButton;
     public Button cancelButton;
-    static ObservableList<User> users;
+    static ObservableList<User> Users;
 
     public void onLogInButton(ActionEvent actionEvent) throws IOException, SQLException {
         String username = usernameTextField.getText();
@@ -42,7 +42,7 @@ public class LogInController implements Initializable {
         FileWriter fileWriter = new FileWriter("login_activity.txt", true);
         PrintWriter outputFile = new PrintWriter(fileWriter);
 
-        for(User u: users) {
+        for(User u: Users) {
             if(u.getUserName().equals(username) && u.getPassword().equals(password)) {
                 validUser = true;
                 User user = new User(u.getUserId(), username, password);
@@ -128,7 +128,7 @@ public class LogInController implements Initializable {
         userTimeZoneLabel.setText(String.valueOf(ZoneId.systemDefault()));
 
         try {
-            users = UserDao.getAllUsers();
+            Users = UserDao.getAllUsers();
             if (Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("language/language_fr", Locale.getDefault());
                 usernameLabel.setText(rb.getString("Username"));

@@ -36,14 +36,17 @@ public class Customer {
         this.countryName = countryName;
     }
 
-    public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber, String divisionName, String countryName) {
+    public Customer(int customerId, String customerName, String address, String postalCode, String phoneNumber, int divisionId, int countryId, String divisionName, String countryName) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.address = address;
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
+        this.divisionId = divisionId;
+        this.countryId = countryId;
         this.divisionName = divisionName;
         this.countryName = countryName;
+
     }
 
     public int getCustomerId() {

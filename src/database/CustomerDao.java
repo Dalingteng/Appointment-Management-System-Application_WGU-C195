@@ -21,9 +21,11 @@ public class CustomerDao {
             String address = rs.getString("Address");
             String postalCode = rs.getString("Postal_Code");
             String phoneNumber = rs.getString("Phone");
+            int divisionId = rs.getInt("Division_ID");
+            int countryId = rs.getInt("Country_ID");
             String divisionName = rs.getString("Division");
             String countryName = rs.getString("Country");
-            allCustomers.add(new Customer(customerId, customerName, address, postalCode, phoneNumber, divisionName, countryName));
+            allCustomers.add(new Customer(customerId, customerName, address, postalCode, phoneNumber, divisionId, countryId, divisionName, countryName));
         }
         return allCustomers;
     }
