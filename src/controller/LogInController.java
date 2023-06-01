@@ -97,7 +97,6 @@ public class LogInController implements Initializable {
             if (Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("language/language_fr", Locale.getDefault());
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Log In Error");
                 alert.setHeaderText(rb.getString("Invalid") + " " + rb.getString("Username") + " " +
                                 rb.getString("or") + " " + rb.getString("Password"));
                 alert.showAndWait();
@@ -105,7 +104,6 @@ public class LogInController implements Initializable {
             }
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Log In Error");
                 alert.setHeaderText("Invalid Username or Password");
                 alert.showAndWait();
                 outputFile.println("User: [" + username + "] is failed to log in at " + LocalDateTime.now() + " (" + ZoneId.systemDefault()+")");

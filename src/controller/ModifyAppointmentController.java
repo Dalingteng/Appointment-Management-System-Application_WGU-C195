@@ -35,8 +35,8 @@ public class ModifyAppointmentController {
 
     public void onCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel Confirmation");
-        alert.setHeaderText("Are you sure you want to cancel?");
+        alert.setHeaderText("Cancel Confirmation");
+        alert.setContentText("Are you sure you want to cancel?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

@@ -62,8 +62,8 @@ public class ReportController implements Initializable {
 
     public void onLogOutButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit The Application");
-        alert.setHeaderText("Are you sure you want to exit?");
+        alert.setHeaderText("Exit The Application");
+        alert.setContentText("Are you sure you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             System.exit(0);

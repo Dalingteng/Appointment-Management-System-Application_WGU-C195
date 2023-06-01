@@ -68,8 +68,8 @@ public class AppointmentController implements Initializable {
 
     public void onLogOutButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit The Application");
-        alert.setHeaderText("Are you sure you want to exit?");
+        alert.setHeaderText("Exit The Application");
+        alert.setContentText("Are you sure you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             System.exit(0);
@@ -94,8 +94,8 @@ public class AppointmentController implements Initializable {
 
         if(selectedAppointment != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Delete Confirmation");
-            alert.setHeaderText("Are you sure you want to delete?");
+            alert.setHeaderText("Delete Confirmation");
+            alert.setContentText("Are you sure you want to delete?");
             Optional<ButtonType> result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 AppointmentDao.deleteAppointment(appointmentId, type);
@@ -104,7 +104,6 @@ public class AppointmentController implements Initializable {
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
             alert.setHeaderText("No Appointment Selected");
             alert.setContentText("Please select an appointment to delete.");
             alert.showAndWait();

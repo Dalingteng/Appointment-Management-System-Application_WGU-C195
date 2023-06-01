@@ -48,32 +48,28 @@ public class AddCustomerController implements Initializable {
 
         if(customerName.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Input Error");
-            alert.setHeaderText("Field cannot be empty");
+            alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Customer Name' field.");
             alert.showAndWait();
             return;
         }
         if(address.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Input Error");
-            alert.setHeaderText("Field cannot be empty");
+            alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Address' field.");
             alert.showAndWait();
             return;
         }
         if(postalCode.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Input Error");
-            alert.setHeaderText("Field cannot be empty");
+            alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Postal Code' field.");
             alert.showAndWait();
             return;
         }
         if(phoneNumber.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Input Error");
-            alert.setHeaderText("Field cannot be empty");
+            alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Phone Number' field.");
             alert.showAndWait();
             return;
@@ -96,8 +92,8 @@ public class AddCustomerController implements Initializable {
 
     public void onCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel Confirmation");
-        alert.setHeaderText("Are you sure you want to cancel?");
+        alert.setHeaderText("Cancel Confirmation");
+        alert.setContentText("Are you sure you want to cancel?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();

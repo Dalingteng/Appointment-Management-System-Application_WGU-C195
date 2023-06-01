@@ -42,8 +42,8 @@ public class CustomerController implements Initializable {
 
     public void onLogOutButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit The Application");
-        alert.setHeaderText("Are you sure you want to exit?");
+        alert.setHeaderText("Exit The Application");
+        alert.setContentText("Are you sure you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             System.exit(0);
@@ -71,7 +71,6 @@ public class CustomerController implements Initializable {
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
             alert.setHeaderText("No Customer Selected");
             alert.setContentText("Please select a customer to modify.");
             alert.showAndWait();
@@ -86,13 +85,12 @@ public class CustomerController implements Initializable {
 
         if(selectedCustomer != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Delete Confirmation");
-            alert.setHeaderText("Are you sure you want to delete?");
+            alert.setHeaderText("Delete Confirmation");
+            alert.setContentText("Are you sure you want to delete?");
             Optional<ButtonType> result = alert.showAndWait();
             if(!AppointmentDao.getAppointmentsByCustomer(customerId).isEmpty()) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
-                alertError.setTitle("Error");
-                alertError.setHeaderText("Unable to delete customer");
+                alertError.setHeaderText("Unable to Delete Customer");
                 alertError.setContentText("All customer's appointments must be deleted first before continue.");
                 alertError.showAndWait();
             }
@@ -105,7 +103,6 @@ public class CustomerController implements Initializable {
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
             alert.setHeaderText("No Customer Selected");
             alert.setContentText("Please select a customer to delete.");
             alert.showAndWait();
