@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
+import model.Customer;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -83,7 +85,24 @@ public class AppointmentController implements Initializable {
         stage.show();
     }
 
-    public void onModifyAppointmentButton(ActionEvent actionEvent) {
+    public void onModifyAppointmentButton(ActionEvent actionEvent) throws IOException, SQLException {
+        Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+        if(selectedAppointment != null) {
+            Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader loader =  new FXMLLoader(getClass().getResource("../view/ModifyAppointment.fxml"));
+            Parent parent = loader.load();
+            stage.setScene(new Scene(parent));
+            stage.show();
+
+            ModifyAppointmentController modifyAppointmentController = loader.getController();
+            modifyAppointmentController.passAppointment(selectedAppointment);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("No Appointment Selected");
+            alert.setContentText("Please select an appointment to modify.");
+            alert.showAndWait();
+        }
     }
 
     public void onDeleteAppointmentButton(ActionEvent actionEvent) throws SQLException {
