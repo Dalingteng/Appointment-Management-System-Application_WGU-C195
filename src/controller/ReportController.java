@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import model.Appointment;
 import model.Contact;
 import model.Report;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

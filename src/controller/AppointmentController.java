@@ -1,10 +1,7 @@
 package controller;
 
-import com.mysql.cj.result.LocalDateValueFactory;
 import database.AppointmentDao;
 import database.JDBC;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,13 +13,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
-import model.Customer;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Optional;
@@ -63,7 +57,6 @@ public class AppointmentController implements Initializable {
             LocalDate appointmentDate = a.getStartDate();
             return ((appointmentDate.isEqual(now) || appointmentDate.isAfter(now)) && appointmentDate.isBefore(now.plusWeeks(1)));
         });
-
         appointmentTable.setItems(filteredList);
     }
 
@@ -76,7 +69,6 @@ public class AppointmentController implements Initializable {
             LocalDate appointmentDate = a.getStartDate();
             return ((appointmentDate.isEqual(now) || appointmentDate.isAfter(now)) && appointmentDate.isBefore(now.plusMonths(1)));
         });
-
         appointmentTable.setItems(filteredList);
     }
 

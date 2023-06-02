@@ -34,7 +34,6 @@ public class ModifyCustomerController implements Initializable {
     public void passCustomer(Customer selectedCustomer) throws SQLException {
         JDBC.makeConnection();
         passSelectedCustomer = selectedCustomer;
-
         customerIdTextField.setText(String.valueOf(selectedCustomer.getCustomerId()));
         customerNameTextField.setText(selectedCustomer.getCustomerName());
         addressTextField.setText(selectedCustomer.getAddress());
@@ -47,7 +46,6 @@ public class ModifyCustomerController implements Initializable {
                 break;
             }
         }
-
         for(Division d: divisionComboBox.getItems()) {
             if(d.getDivisionId() == selectedCustomer.getDivisionId()) {
                 divisionComboBox.setValue(d);

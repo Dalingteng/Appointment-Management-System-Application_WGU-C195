@@ -81,6 +81,7 @@ public class AddCustomerController implements Initializable {
                 divisionId = division.getDivisionId();
             }
         }
+
         CustomerDao customerDao = new CustomerDao();
         customerDao.addCustomer(Customer.getAutoCustomerId(), customerName, address, postalCode, phoneNumber, divisionId);
 

@@ -38,7 +38,6 @@ public class ModifyAppointmentController implements Initializable {
     public void passAppointment(Appointment selectedAppointment) throws SQLException {
         JDBC.makeConnection();
         passSelectedAppointment = selectedAppointment;
-
         appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
         titleTextField.setText(String.valueOf(selectedAppointment.getTitle()));
         descriptionTextField.setText(selectedAppointment.getDescription());
@@ -146,7 +145,6 @@ public class ModifyAppointmentController implements Initializable {
             alert.showAndWait();
             return;
         }
-
         if(startDateTime.isAfter(endDateTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Invalid Date/Time");
@@ -154,7 +152,6 @@ public class ModifyAppointmentController implements Initializable {
             alert.showAndWait();
             return;
         }
-
         if(startDateTime.isEqual(endDateTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Invalid Date/Time");
@@ -196,12 +193,10 @@ public class ModifyAppointmentController implements Initializable {
                 }
             }
         }
-//        try {
+
         AppointmentDao appointmentDao = new AppointmentDao();
         appointmentDao.updateAppointment(appointmentId, title, description, location, type, startDateTime, endDateTime, customerId, userId, contactId);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
+
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
         stage.setScene(new Scene(parent));
