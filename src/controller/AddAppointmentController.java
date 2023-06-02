@@ -42,9 +42,9 @@ public class AddAppointmentController implements Initializable {
         String description = descriptionTextField.getText();
         String location = locationTextField.getText();
         String type = typeTextField.getText();
-        int contactId = contactIdComboBox.getSelectionModel().getSelectedItem().getContactId();
-        int customerId = customerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
-        int userId = userIdComboBox.getSelectionModel().getSelectedItem().getUserId();
+        int contactId = contactIdComboBox.getValue().getContactId();
+        int customerId = customerIdComboBox.getValue().getCustomerId();
+        int userId = userIdComboBox.getValue().getUserId();
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
         LocalTime startTime = startTimeComboBox.getSelectionModel().getSelectedItem();
@@ -89,37 +89,30 @@ public class AddAppointmentController implements Initializable {
         System.out.println("EST start: " + estStartDateTime);
         System.out.println("EST end: " + estEndDateTime);
 
-        //Convert EST to LocalTime and Day to check business operation and hour
-        LocalTime appointmentStartTime = estStartDateTime.toLocalTime();
-        LocalTime appointmentEndTime = estEndDateTime.toLocalTime();
-
+        //Check business day
         int startDay = estStartDateTime.getDayOfWeek().getValue();
         int endDay = estEndDateTime.getDayOfWeek().getValue();
-
         int monday = DayOfWeek.MONDAY.getValue();
         int friday = DayOfWeek.FRIDAY.getValue();
 
         if(startDay < monday || startDay > friday || endDay < monday || endDay > friday) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Business Not In Operation");
-            alert.setContentText("The appointment day is not in business operations (Monday - Friday).");
+            alert.setContentText("The appointment day is outside of business operations (Monday-Friday between 08:00 and 22:00 EST).");
             alert.showAndWait();
             return;
         }
 
-
-        //Check versus business hours
+        //Check business hours
+        LocalTime appointmentStartTime = estStartDateTime.toLocalTime();
+        LocalTime appointmentEndTime = estEndDateTime.toLocalTime();
         LocalTime businessStartTime = LocalTime.of(8, 0);
         LocalTime businessEndTime = LocalTime.of(22, 0);
-//
-//        ZonedDateTime businessStartTime = ZonedDateTime.of(startDateTime, ZoneId.of("US/Eastern" );
-//        ZonedDateTime businessEndTime = Zone
-
 
         if(appointmentStartTime.isBefore(businessStartTime) || appointmentStartTime.isAfter(businessEndTime) || appointmentEndTime.isBefore(businessStartTime) || appointmentEndTime.isAfter(businessEndTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Business Not In Operation");
-            alert.setContentText("The appointment time (" + appointmentStartTime + "-" + appointmentEndTime + " EST) is not in business hours between 08:00 and 22:00 EST.");
+            alert.setContentText("The appointment time [" + appointmentStartTime + "-" + appointmentEndTime + " EST] is outside of business operations (Monday-Friday between 8:00 and 22:00 EST).");
             alert.showAndWait();
             return;
         }
@@ -144,15 +137,15 @@ public class AddAppointmentController implements Initializable {
             LocalDateTime existedStartDateTime = LocalDateTime.of(a.getStartDate(), a.getStartTime());
             LocalDateTime existedEndDateTime = LocalDateTime.of(a.getEndDate(), a.getEndTime());
 
-            if(startDateTime.isBefore(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime) &&
-                    endDateTime.isAfter(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime)) {
+            if((startDateTime.isBefore(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
+                    (endDateTime.isAfter(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Overlapping Appointments");
                 alert.setContentText("The appointment overlaps with existing appointment.");
                 alert.showAndWait();
                 return;
             }
-            if(startDateTime.isAfter(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime) &&
+            if((startDateTime.isAfter(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
                     startDateTime.isBefore(existedEndDateTime)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Overlapping Appointments");
@@ -161,7 +154,7 @@ public class AddAppointmentController implements Initializable {
                 return;
             }
             if(endDateTime.isAfter(existedStartDateTime) &&
-                    endDateTime.isBefore(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime)) {
+                    (endDateTime.isBefore(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Overlapping Appointments");
                 alert.setContentText("The appointment \"End Time\" overlaps with existing appointments");
@@ -207,18 +200,6 @@ public class AddAppointmentController implements Initializable {
 
             ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
             ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
-
-//            LocalTime time = LocalTime.of(0, 0);
-//            while(!time.isBefore(LocalTime.of(23, 50))) {
-//                startTimeList.add(time);
-//                endTimeList.add(time.plusMinutes(30));
-//                time = time.plusMinutes(30);
-//            }
-
-//            startTimeList.remove(startTimeList.size() - 1);
-//            endTimeList.remove(0);
-
-
             for(LocalTime time = LocalTime.of(0, 0); time.isBefore(LocalTime.of(23, 30)); time = time.plusMinutes(30)) {
                 startTimeList.add(time);
                 endTimeList.add(time.plusMinutes(30));
@@ -227,22 +208,9 @@ public class AddAppointmentController implements Initializable {
             endTimeList.add(LocalTime.of(0, 0));
 
             startTimeComboBox.setItems(startTimeList);
-            startTimeComboBox.getSelectionModel().select(LocalTime.of(0, 0));
+            startTimeComboBox.getSelectionModel().selectFirst();
             endTimeComboBox.setItems(endTimeList);
-            endTimeComboBox.getSelectionModel().select(LocalTime.of(0, 30));
-
-
-            //Get the start date from datepicker
-            //Get the start time from timeComboBox
-            //Convert to string DateTimeFormatter
-            //Then convert to LocalDateTime
-            //insert to database using Timestamp.valueOf(LocalDateTime)
-            //convert to EST to check for business hour using ZonedDateTime
-            //alert if the appointment collides with the existing appointment
-
-            //check must be in business hour
-            //check not to overlap with existing appointment
-            //using for loop
+            endTimeComboBox.getSelectionModel().selectFirst();
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

@@ -28,14 +28,12 @@ public class ModifyCustomerController implements Initializable {
     public Button saveButton;
     public Button cancelButton;
     private Customer passSelectedCustomer;
-//    private int idIndex;
     private int countryId;
     private int divisionId;
 
     public void passCustomer(Customer selectedCustomer) throws SQLException {
         JDBC.makeConnection();
         passSelectedCustomer = selectedCustomer;
-//        idIndex = CustomerDao.getAllCustomers().indexOf(passSelectedCustomer);
 
         customerIdTextField.setText(String.valueOf(selectedCustomer.getCustomerId()));
         customerNameTextField.setText(selectedCustomer.getCustomerName());
