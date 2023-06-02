@@ -107,11 +107,14 @@ public class AddAppointmentController implements Initializable {
             return;
         }
 
+
         //Check versus business hours
         LocalTime businessStartTime = LocalTime.of(8, 0);
         LocalTime businessEndTime = LocalTime.of(22, 0);
 //
-//        ZonedDateTime businessStartTime = atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
+//        ZonedDateTime businessStartTime = ZonedDateTime.of(startDateTime, ZoneId.of("US/Eastern" );
+//        ZonedDateTime businessEndTime = Zone
+
 
         if(appointmentStartTime.isBefore(businessStartTime) || appointmentStartTime.isAfter(businessEndTime) || appointmentEndTime.isBefore(businessStartTime) || appointmentEndTime.isAfter(businessEndTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
