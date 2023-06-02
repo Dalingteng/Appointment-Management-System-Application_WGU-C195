@@ -1,8 +1,13 @@
 package controller;
 
+import com.mysql.cj.result.LocalDateValueFactory;
 import database.AppointmentDao;
 import database.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -17,7 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -44,14 +51,38 @@ public class AppointmentController implements Initializable {
     public Button addAppointmentButton;
     public Button modifyAppointmentButton;
     public Button deleteAppointmentButton;
+    @FXML
+    ToggleGroup view = new ToggleGroup();
 
-    public void onWeekRadioButton(ActionEvent actionEvent) {
+    public void onWeekRadioButton(ActionEvent actionEvent) throws SQLException {
+        weekRadioButton.setToggleGroup(view);
+        LocalDate now = LocalDate.now(ZoneId.systemDefault());
+
+        FilteredList<Appointment> filteredList = new FilteredList<>(AppointmentDao.getAllAppointments());
+        filteredList.setPredicate(a -> {
+            LocalDate appointmentDate = a.getStartDate();
+            return ((appointmentDate.isEqual(now) || appointmentDate.isAfter(now)) && appointmentDate.isBefore(now.plusWeeks(1)));
+        });
+
+        appointmentTable.setItems(filteredList);
     }
 
-    public void onMonthRadioButton(ActionEvent actionEvent) {
+    public void onMonthRadioButton(ActionEvent actionEvent) throws SQLException {
+        monthRadioButton.setToggleGroup(view);
+        LocalDate now = LocalDate.now(ZoneId.systemDefault());
+
+        FilteredList<Appointment> filteredList = new FilteredList<>(AppointmentDao.getAllAppointments());
+        filteredList.setPredicate(a -> {
+            LocalDate appointmentDate = a.getStartDate();
+            return ((appointmentDate.isEqual(now) || appointmentDate.isAfter(now)) && appointmentDate.isBefore(now.plusMonths(1)));
+        });
+
+        appointmentTable.setItems(filteredList);
     }
 
-    public void onAllRadioButton(ActionEvent actionEvent) {
+    public void onAllRadioButton(ActionEvent actionEvent) throws SQLException {
+        allRadioButton.setToggleGroup(view);
+        appointmentTable.setItems(AppointmentDao.getAllAppointments());
     }
 
     public void onCustomerButton(ActionEvent actionEvent) throws IOException {

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -15,9 +16,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <RadioButton fx:id="weekRadioButton" layoutX="812.0" layoutY="83.0" mnemonicParsing="false" onAction="#onWeekRadioButton" text="Week" />
-      <RadioButton fx:id="monthRadioButton" layoutX="877.0" layoutY="83.0" mnemonicParsing="false" onAction="#onMonthRadioButton" text="Month" />
-      <RadioButton fx:id="allRadioButton" layoutX="948.0" layoutY="82.0" mnemonicParsing="false" onAction="#onAllRadioButton" selected="true" text="All" />
+      <RadioButton fx:id="weekRadioButton" layoutX="812.0" layoutY="83.0" mnemonicParsing="false" onAction="#onWeekRadioButton" text="Week">
+         <toggleGroup>
+            <ToggleGroup fx:id="view" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="monthRadioButton" layoutX="877.0" layoutY="83.0" mnemonicParsing="false" onAction="#onMonthRadioButton" text="Month" toggleGroup="$view" />
+      <RadioButton fx:id="allRadioButton" layoutX="948.0" layoutY="82.0" mnemonicParsing="false" onAction="#onAllRadioButton" selected="true" text="All" toggleGroup="$view" />
       <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="106.0" prefHeight="388.0" prefWidth="971.0">
         <columns>
           <TableColumn fx:id="appointmentIdColumn" prefWidth="114.0" text="Appointment ID" />
