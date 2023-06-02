@@ -166,40 +166,42 @@ public class ModifyAppointmentController implements Initializable {
         for(Appointment a: AppointmentDao.getAppointmentsByCustomer(customerId)) {
             LocalDateTime existedStartDateTime = LocalDateTime.of(a.getStartDate(), a.getStartTime());
             LocalDateTime existedEndDateTime = LocalDateTime.of(a.getEndDate(), a.getEndTime());
-
-//            if((a.getAppointmentId() == appointmentId)) {
-//                break;
-//            }
-
-            if((startDateTime.isBefore(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
-                    (endDateTime.isAfter(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Overlapping Appointments");
-                alert.setContentText("The appointment overlaps with existing appointment.");
-                alert.showAndWait();
-                return;
+            if (a.getAppointmentId() == appointmentId) {
+                continue;
             }
-            if((startDateTime.isAfter(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
-                    startDateTime.isBefore(existedEndDateTime)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Overlapping Appointments");
-                alert.setContentText("The appointment \"Start Time\" overlaps with existing appointment.");
-                alert.showAndWait();
-                return;
-            }
-            if(endDateTime.isAfter(existedStartDateTime) &&
-                    (endDateTime.isBefore(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Overlapping Appointments");
-                alert.setContentText("The appointment \"End Time\" overlaps with existing appointments");
-                alert.showAndWait();
-                return;
+            else {
+                if ((startDateTime.isBefore(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
+                        (endDateTime.isAfter(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Overlapping Appointments");
+                    alert.setContentText("The appointment overlaps with existing appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+                if ((startDateTime.isAfter(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
+                        startDateTime.isBefore(existedEndDateTime)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Overlapping Appointments");
+                    alert.setContentText("The appointment \"Start Time\" overlaps with existing appointment.");
+                    alert.showAndWait();
+                    return;
+                }
+                if (endDateTime.isAfter(existedStartDateTime) &&
+                        (endDateTime.isBefore(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Overlapping Appointments");
+                    alert.setContentText("The appointment \"End Time\" overlaps with existing appointments");
+                    alert.showAndWait();
+                    return;
+                }
             }
         }
-
+//        try {
         AppointmentDao appointmentDao = new AppointmentDao();
         appointmentDao.updateAppointment(appointmentId, title, description, location, type, startDateTime, endDateTime, customerId, userId, contactId);
-
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../view/Appointment.fxml"));
         stage.setScene(new Scene(parent));
