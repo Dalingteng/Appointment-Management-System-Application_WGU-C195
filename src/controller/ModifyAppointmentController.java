@@ -66,6 +66,10 @@ public class ModifyAppointmentController implements Initializable {
             }
         }
 
+        startDatePicker.setValue(selectedAppointment.getStartDate());
+        endDatePicker.setValue(selectedAppointment.getEndDate());
+        startTimeComboBox.getSelectionModel().select(selectedAppointment.getStartTime());
+        endTimeComboBox.getSelectionModel().select(selectedAppointment.getEndTime());
     }
 
     public void onSaveButton(ActionEvent actionEvent) {

@@ -93,8 +93,8 @@ public class AddAppointmentController implements Initializable {
         LocalTime appointmentStartTime = estStartDateTime.toLocalTime();
         LocalTime appointmentEndTime = estEndDateTime.toLocalTime();
 
-        int startDay = estStartDateTime.toLocalDate().getDayOfWeek().getValue();
-        int endDay = estEndDateTime.toLocalDate().getDayOfWeek().getValue();
+        int startDay = estStartDateTime.getDayOfWeek().getValue();
+        int endDay = estEndDateTime.getDayOfWeek().getValue();
 
         int monday = DayOfWeek.MONDAY.getValue();
         int friday = DayOfWeek.FRIDAY.getValue();
@@ -110,6 +110,8 @@ public class AddAppointmentController implements Initializable {
         //Check versus business hours
         LocalTime businessStartTime = LocalTime.of(8, 0);
         LocalTime businessEndTime = LocalTime.of(22, 0);
+//
+//        ZonedDateTime businessStartTime = atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
 
         if(appointmentStartTime.isBefore(businessStartTime) || appointmentStartTime.isAfter(businessEndTime) || appointmentEndTime.isBefore(businessStartTime) || appointmentEndTime.isAfter(businessEndTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -203,20 +205,23 @@ public class AddAppointmentController implements Initializable {
             ObservableList<LocalTime> startTimeList = FXCollections.observableArrayList();
             ObservableList<LocalTime> endTimeList = FXCollections.observableArrayList();
 
-//            LocalTime startTime = LocalTime.of(8, 0);
-//            LocalTime endTime = LocalTime.of(22, 0);
+//            LocalTime time = LocalTime.of(0, 0);
+//            while(!time.isBefore(LocalTime.of(23, 50))) {
+//                startTimeList.add(time);
+//                endTimeList.add(time.plusMinutes(30));
+//                time = time.plusMinutes(30);
+//            }
+
+//            startTimeList.remove(startTimeList.size() - 1);
+//            endTimeList.remove(0);
 
 
-//            LocalTime time = LocalTime.MIN;
-            LocalTime time = LocalTime.of(0, 0);
-//            while(!time.equals(LocalTime.MAX)){
-            while(!time.equals(LocalTime.of(23, 30))) {
+            for(LocalTime time = LocalTime.of(0, 0); time.isBefore(LocalTime.of(23, 30)); time = time.plusMinutes(30)) {
                 startTimeList.add(time);
-                endTimeList.add(time);
-                time = time.plusMinutes(30);
+                endTimeList.add(time.plusMinutes(30));
             }
-            startTimeList.remove(startTimeList.size() - 1);
-            endTimeList.remove(0);
+            startTimeList.add(LocalTime.of(23, 30));
+            endTimeList.add(LocalTime.of(0, 0));
 
             startTimeComboBox.setItems(startTimeList);
             startTimeComboBox.getSelectionModel().select(LocalTime.of(0, 0));
