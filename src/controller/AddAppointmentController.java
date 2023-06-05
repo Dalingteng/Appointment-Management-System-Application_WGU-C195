@@ -61,24 +61,38 @@ public class AddAppointmentController implements Initializable {
             alert.showAndWait();
             return;
         }
-        if(description.isEmpty()) {
+        else if(description.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Description' field.");
             alert.showAndWait();
             return;
         }
-        if(location.isEmpty()) {
+        else if(location.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Location' field.");
             alert.showAndWait();
             return;
         }
-        if(type.isEmpty()) {
+        else if(type.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Field Cannot Be Empty");
             alert.setContentText("Please fill out 'Type' field.");
+            alert.showAndWait();
+            return;
+        }
+        else if(startDateTime.isAfter(endDateTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Invalid Date/Time");
+            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
+            alert.showAndWait();
+            return;
+        }
+        else if(startDateTime.isEqual(endDateTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Invalid Date/Time");
+            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
             alert.showAndWait();
             return;
         }
@@ -116,20 +130,20 @@ public class AddAppointmentController implements Initializable {
             alert.showAndWait();
             return;
         }
-        if(startDateTime.isAfter(endDateTime)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Invalid Date/Time");
-            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
-            alert.showAndWait();
-            return;
-        }
-        if(startDateTime.isEqual(endDateTime)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Invalid Date/Time");
-            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
-            alert.showAndWait();
-            return;
-        }
+//        if(startDateTime.isAfter(endDateTime)) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("Invalid Date/Time");
+//            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
+//            alert.showAndWait();
+//            return;
+//        }
+//        else if(startDateTime.isEqual(endDateTime)) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText("Invalid Date/Time");
+//            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
+//            alert.showAndWait();
+//            return;
+//        }
 
         for(Appointment a: AppointmentDao.getAppointmentsByCustomer(customerId)) {
             LocalDateTime existedStartDateTime = LocalDateTime.of(a.getStartDate(), a.getStartTime());
@@ -143,7 +157,7 @@ public class AddAppointmentController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            if((startDateTime.isAfter(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
+            else if((startDateTime.isAfter(existedStartDateTime) || startDateTime.isEqual(existedStartDateTime)) &&
                     startDateTime.isBefore(existedEndDateTime)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Overlapping Appointments");
@@ -151,7 +165,7 @@ public class AddAppointmentController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            if(endDateTime.isAfter(existedStartDateTime) &&
+            else if(endDateTime.isAfter(existedStartDateTime) &&
                     (endDateTime.isBefore(existedEndDateTime) || endDateTime.isEqual(existedEndDateTime))) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Overlapping Appointments");
