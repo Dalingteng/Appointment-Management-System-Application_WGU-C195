@@ -131,8 +131,8 @@ public class LogInController implements Initializable {
                 ResourceBundle rb = ResourceBundle.getBundle("language/language_fr", Locale.getDefault());
                 usernameLabel.setText(rb.getString("Username"));
                 passwordLabel.setText(rb.getString("Password"));
-                timeZoneLabel.setText(rb.getString("Time Zone"));
-                logInButton.setText(rb.getString("Log In"));
+                timeZoneLabel.setText(rb.getString("TimeZone"));
+                logInButton.setText(rb.getString("LogIn"));
                 resetButton.setText(rb.getString("Reset"));
                 cancelButton.setText(rb.getString("Cancel"));
             }
