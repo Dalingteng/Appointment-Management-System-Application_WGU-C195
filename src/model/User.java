@@ -5,15 +5,15 @@ package model;
  */
 public class User {
     /**
-     * The id of user
+     * the id of user
      */
     private int userId;
     /**
-     * The name of user
+     * the name of user
      */
     private String userName;
     /**
-     * The password of user
+     * the password of user
      */
     private String password;
 

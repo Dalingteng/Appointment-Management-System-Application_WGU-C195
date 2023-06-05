@@ -1,53 +1,80 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
- *
+ * This class is for appointments in database.
  */
 public class Appointment {
+    /**
+     * the id of appointment
+     */
     private int appointmentId;
+    /**
+     * the title of appointment
+     */
     private String title;
+    /**
+     * the description of appointment
+     */
     private String description;
+    /**
+     * the location of appointment
+     */
     private String location;
+    /**
+     * the type of appointment
+     */
     private String type;
+    /**
+     * the start date of appointment
+     */
     private LocalDate startDate;
+    /**
+     * the end date of appointment
+     */
     private LocalDate endDate;
+    /**
+     * the start time of appointment
+     */
     private LocalTime startTime;
+    /**
+     * the end time of appointment
+     */
     private LocalTime endTime;
-    private LocalDateTime createDate;
-    private String createdBy;
-    private LocalDateTime lastUpdate;
-    private String lastUpdatedBy;
+    /**
+     * the id of customer of appointment
+     */
     private int customerId;
+    /**
+     * the id of user of appointment
+     */
     private int userId;
+    /**
+     * the id of contact of appointment
+     */
     private int contactId;
+    /**
+     * the auto-generated appointment id
+     */
     private static int autoAppointmentId = 1;
 
-//    public Appointment(int appointmentId, String title, String description, String location, String type,
-//                       LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
-//                       LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
-//                       int customerId, int userId, int contactId) {
-//        this.appointmentId = appointmentId;
-//        this.title = title;
-//        this.description = description;
-//        this.location = location;
-//        this.type = type;
-//        this.startDate = startDate;
-//        this.endDate = endDate;
-//        this.startTime = startTime;
-//        this.endTime = endTime;
-//        this.createDate = createDate;
-//        this.createdBy = createdBy;
-//        this.lastUpdate = lastUpdate;
-//        this.lastUpdatedBy = lastUpdatedBy;
-//        this.customerId = customerId;
-//        this.userId = userId;
-//        this.contactId = contactId;
-//    }
-
+    /**
+     * Creates a new object of Appointment class.
+     * @param appointmentId the id of appointment
+     * @param title
+     * @param description
+     * @param location
+     * @param type
+     * @param startDate
+     * @param endDate
+     * @param startTime
+     * @param endTime
+     * @param customerId
+     * @param userId
+     * @param contactId
+     */
     public Appointment(int appointmentId, String title, String description, String location, String type,
                        LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
                        int customerId, int userId, int contactId) {
@@ -135,38 +162,6 @@ public class Appointment {
 
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
     }
 
     public int getCustomerId() {

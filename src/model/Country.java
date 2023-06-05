@@ -5,11 +5,11 @@ package model;
  */
 public class Country {
     /**
-     * The id of country
+     * the id of country
      */
     private int countryId;
     /**
-     * The name of country
+     * the name of country
      */
     private String countryName;
 
