@@ -28,8 +28,6 @@ public class ModifyCustomerController implements Initializable {
     public Button saveButton;
     public Button cancelButton;
     private Customer passSelectedCustomer;
-    private int countryId;
-    private int divisionId;
 
     public void passCustomer(Customer selectedCustomer) throws SQLException {
         JDBC.makeConnection();
@@ -40,22 +38,32 @@ public class ModifyCustomerController implements Initializable {
         postalCodeTextField.setText(selectedCustomer.getPostalCode());
         phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
 
-        for(Country c: countryComboBox.getItems()) {
-            if(c.getCountryId() == selectedCustomer.getCountryId()) {
-                countryComboBox.setValue(c);
-                break;
+        countryComboBox.getItems().forEach(country -> {
+            if(country.getCountryId() == selectedCustomer.getCountryId()) {
+                countryComboBox.setValue(country);
             }
-        }
-        for(Division d: divisionComboBox.getItems()) {
-            if(d.getDivisionId() == selectedCustomer.getDivisionId()) {
-                divisionComboBox.setValue(d);
-                break;
+        });
+        divisionComboBox.getItems().forEach(division -> {
+            if(division.getDivisionId() == selectedCustomer.getDivisionId()) {
+                divisionComboBox.setValue(division);
             }
-        }
+        });
+//        for(Country c: countryComboBox.getItems()) {
+//            if(c.getCountryId() == selectedCustomer.getCountryId()) {
+//                countryComboBox.setValue(c);
+//                break;
+//            }
+//        }
+//        for(Division d: divisionComboBox.getItems()) {
+//            if(d.getDivisionId() == selectedCustomer.getDivisionId()) {
+//                divisionComboBox.setValue(d);
+//                break;
+//            }
+//        }
     }
 
     public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
-        countryId = countryComboBox.getValue().getCountryId();
+        int countryId = countryComboBox.getValue().getCountryId();
         divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
         divisionComboBox.getSelectionModel().selectFirst();
     }

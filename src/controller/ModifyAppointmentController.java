@@ -44,24 +44,39 @@ public class ModifyAppointmentController implements Initializable {
         locationTextField.setText(selectedAppointment.getLocation());
         typeTextField.setText(selectedAppointment.getType());
 
-        for(Contact contact: contactIdComboBox.getItems()) {
+        contactIdComboBox.getItems().forEach(contact -> {
             if(contact.getContactId() == selectedAppointment.getContactId()) {
                 contactIdComboBox.setValue(contact);
-                break;
             }
-        }
-        for(Customer c: customerIdComboBox.getItems()) {
-            if(c.getCustomerId() == selectedAppointment.getCustomerId()) {
-                customerIdComboBox.setValue(c);
-                break;
+        });
+        customerIdComboBox.getItems().forEach(customer -> {
+            if(customer.getCustomerId() == selectedAppointment.getCustomerId()) {
+                customerIdComboBox.setValue(customer);
             }
-        }
-        for(User u: userIdComboBox.getItems()) {
-            if(u.getUserId() == selectedAppointment.getUserId()) {
-                userIdComboBox.setValue(u);
-                break;
+        });
+        userIdComboBox.getItems().forEach(user -> {
+            if(user.getUserId() == selectedAppointment.getUserId()) {
+                userIdComboBox.setValue(user);
             }
-        }
+        });
+//        for(Contact contact: contactIdComboBox.getItems()) {
+//            if(contact.getContactId() == selectedAppointment.getContactId()) {
+//                contactIdComboBox.setValue(contact);
+//                break;
+//            }
+//        }
+//        for(Customer c: customerIdComboBox.getItems()) {
+//            if(c.getCustomerId() == selectedAppointment.getCustomerId()) {
+//                customerIdComboBox.setValue(c);
+//                break;
+//            }
+//        }
+//        for(User u: userIdComboBox.getItems()) {
+//            if(u.getUserId() == selectedAppointment.getUserId()) {
+//                userIdComboBox.setValue(u);
+//                break;
+//            }
+//        }
 
         startDatePicker.setValue(selectedAppointment.getStartDate());
         endDatePicker.setValue(selectedAppointment.getEndDate());
@@ -232,7 +247,6 @@ public class ModifyAppointmentController implements Initializable {
             }
             startTimeList.add(LocalTime.of(23, 30));
             endTimeList.add(LocalTime.of(0, 0));
-
             startTimeComboBox.setItems(startTimeList);
             endTimeComboBox.setItems(endTimeList);
         } catch (Exception e) {
