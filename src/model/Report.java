@@ -1,18 +1,47 @@
 package model;
 
+/**
+ * This class is for reports.
+ */
 public class Report {
+    /**
+     * the month of appointment
+     */
     private String month;
+    /**
+     * the type of appointment
+     */
     private String type;
+    /**
+     * the number of appointment by month and type
+     */
     private int monthTypeCount;
+    /**
+     * the country of customer who makes appointment
+     */
     private String country;
+    /**
+     * the number of appointment by country
+     */
     private int countryCount;
 
+    /**
+     * Creates a new object of Report class by month and type.
+     * @param month
+     * @param type
+     * @param monthTypeCount
+     */
     public Report(String month, String type, int monthTypeCount) {
         this.month = month;
         this.type = type;
         this.monthTypeCount = monthTypeCount;
     }
 
+    /**
+     * Creates a new object of Report class by country.
+     * @param country
+     * @param countryCount
+     */
     public Report(String country, int countryCount) {
         this.country = country;
         this.countryCount = countryCount;

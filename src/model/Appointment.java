@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ *
+ */
 public class Appointment {
     private int appointmentId;
     private String title;
@@ -23,27 +26,27 @@ public class Appointment {
     private int contactId;
     private static int autoAppointmentId = 1;
 
-    public Appointment(int appointmentId, String title, String description, String location, String type,
-                       LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
-                       LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
-                       int customerId, int userId, int contactId) {
-        this.appointmentId = appointmentId;
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.type = type;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
-        this.customerId = customerId;
-        this.userId = userId;
-        this.contactId = contactId;
-    }
+//    public Appointment(int appointmentId, String title, String description, String location, String type,
+//                       LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
+//                       LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
+//                       int customerId, int userId, int contactId) {
+//        this.appointmentId = appointmentId;
+//        this.title = title;
+//        this.description = description;
+//        this.location = location;
+//        this.type = type;
+//        this.startDate = startDate;
+//        this.endDate = endDate;
+//        this.startTime = startTime;
+//        this.endTime = endTime;
+//        this.createDate = createDate;
+//        this.createdBy = createdBy;
+//        this.lastUpdate = lastUpdate;
+//        this.lastUpdatedBy = lastUpdatedBy;
+//        this.customerId = customerId;
+//        this.userId = userId;
+//        this.contactId = contactId;
+//    }
 
     public Appointment(int appointmentId, String title, String description, String location, String type,
                        LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,

@@ -1,89 +1,79 @@
 package model;
 
-import java.time.LocalDateTime;
-
+/**
+ * This class is for users in database.
+ */
 public class User {
+    /**
+     * The id of user
+     */
     private int userId;
+    /**
+     * The name of user
+     */
     private String userName;
+    /**
+     * The password of user
+     */
     private String password;
-    private LocalDateTime createDate;
-    private String createdBy;
-    private LocalDateTime lastUpdate;
-    private String lastUpdatedBy;
 
-    public User(int userId, String userName, String password, LocalDateTime createDate,
-                String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
+    /**
+     * Creates a new object of User class.
+     * @param userId the id of user
+     * @param userName the name of user
+     * @param password the password of user
+     */
     public User(int userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
     }
 
+    /**
+     * @return the id of user
+     */
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * @param userId the id of user
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
+    /**
+     * @return the name of user
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * @param userName the name of user
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * @return the password of user
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password the password of user
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
+    /**
+     * @return the string of user id and user name
+     */
     @Override
     public String toString() {
         return "(" + userId + ") " + userName;

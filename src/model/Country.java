@@ -1,78 +1,59 @@
 package model;
 
-import java.time.LocalDateTime;
-
+/**
+ * This class is for countries in database.
+ */
 public class Country {
+    /**
+     * The id of country
+     */
     private int countryId;
+    /**
+     * The name of country
+     */
     private String countryName;
-    private LocalDateTime createDate;
-    private String createdBy;
-    private LocalDateTime lastUpdate;
-    private String lastUpdatedBy;
 
-    public Country(int countryId, String countryName, LocalDateTime createDate, String createdBy,
-                   LocalDateTime lastUpdate, String lastUpdatedBy) {
-        this.countryId = countryId;
-        this.countryName = countryName;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
+    /**
+     * Creates a new object of Country class.
+     * @param countryId the id of country
+     * @param countryName the name of country
+     */
     public Country(int countryId, String countryName) {
         this.countryId = countryId;
         this.countryName = countryName;
     }
 
+    /**
+     * @return the id of country
+     */
     public int getCountryId() {
         return countryId;
     }
 
+    /**
+     * @param countryId the id of country
+     */
     public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
 
+    /**
+     * @return the name of country
+     */
     public String getCountryName() {
         return countryName;
     }
 
+    /**
+     * @param countryName the name of country
+     */
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
+    /**
+     * @return the name of country
+     */
     @Override
     public String toString() {
         return countryName;
