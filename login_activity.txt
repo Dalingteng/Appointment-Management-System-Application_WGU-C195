@@ -1,0 +1,2 @@
+User: [test] is successfully logged in at 2023-06-05T12:26:44.552529300 (America/Denver)
+User: [test] is successfully logged in at 2023-06-05T13:14:42.873337500 (America/Denver)
