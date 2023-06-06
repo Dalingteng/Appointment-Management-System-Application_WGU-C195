@@ -20,7 +20,7 @@ public class CustomerDao {
      */
     public static ObservableList<Customer> getAllCustomers() throws SQLException {
         String sql = "SELECT * FROM customers, first_level_divisions, countries WHERE customers.Division_ID = first_level_divisions.Division_ID AND " +
-                "first_level_divisions.Country_ID = countries.Country_ID";
+                "first_level_divisions.Country_ID = countries.Country_ID ORDER BY Customer_ID";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
