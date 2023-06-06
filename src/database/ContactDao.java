@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class ContactDao {
     /**
-     * Gets all contacts from the database.
+     * This is the get all contacts method. This gets all contacts from the database.
      * @return the list of all contacts in database
      * @throws SQLException if the database not found
      */

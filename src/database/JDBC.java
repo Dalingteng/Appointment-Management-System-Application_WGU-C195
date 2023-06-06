@@ -60,7 +60,7 @@ public class JDBC {
     }
 
     /**
-     * This is make prepared statement method. This makes a prepared statement when the database is connected.
+     * This is the make prepared statement method. This makes a prepared statement when the database is connected.
      * @param sqlStatement the sql statement to be queried
      * @param conn the connection to the database
      * @throws SQLException if the database not found
@@ -73,7 +73,7 @@ public class JDBC {
     }
 
     /**
-     * This is get prepared statement method.
+     * This is the get prepared statement method.
      * @return the prepared statement if not null
      * @throws SQLException if the database not found
      */

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class UserDao {
     /**
-     * Gets all users from the database.
+     * This is the get all users method. This gets all users from the database.
      * @return the list of all users in database
      * @throws SQLException if the database not found
      */

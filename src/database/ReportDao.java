@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class ReportDao {
     /**
-     * Gets reports of total appointments from the database, grouped by month and type.
+     * This is the get reports by month and type method. This gets reports of total appointments from the database, grouped by month and type.
      * @return the list of total appointments, grouped by month and type
      * @throws SQLException if the database not found
      */
@@ -32,7 +32,7 @@ public class ReportDao {
     }
 
     /**
-     * Gets reports of total appointments from the database, grouped by country.
+     * This is the get reports by country method. This gets reports of total appointments from the database, grouped by country.
      * @return the list of total appointments, grouped by country
      * @throws SQLException if the database not found
      */

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class DivisionDao {
     /**
-     * Gets all divisions from the database.
+     * This is the gets all divisions method. This gets all divisions from the database.
      * @return the list of all divisions in database
      * @throws SQLException if the database not found
      */
@@ -33,7 +33,7 @@ public class DivisionDao {
     }
 
     /**
-     * Gets divisions of a specific country from the database.
+     * This is the get divisions by country method. This gets divisions of a specific country from the database.
      * @param countryId the id of a specific country
      * @return the list of divisions of a specific country
      * @throws SQLException if the database not found

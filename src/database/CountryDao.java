@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class CountryDao {
     /**
-     * Gets all countries from the database.
+     * This is the get all countries method. This gets all countries from the database.
      * @return the list of all countries in the database
      * @throws SQLException if the database not found
      */

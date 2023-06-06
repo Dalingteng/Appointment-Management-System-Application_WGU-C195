@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class CustomerDao {
     /**
-     * Gets all customers from the database.
+     * This is the get all customers method. This gets all customers from the database.
      * @return the list of all customers in database
      * @throws SQLException if the database not found
      */
@@ -40,7 +40,7 @@ public class CustomerDao {
     }
 
     /**
-     * Adds a customer to the database.
+     * This is the add customer method. This adds a customer to the database.
      * @param customerId the id of customer
      * @param customerName the name of customer
      * @param address the address of customer
