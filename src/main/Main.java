@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 import database.JDBC;
 
 /**
- * This is the main class of Appointment Management System.<br><br>
+ * This is the main class of Appointment Management System.
  *
- * <i>Author:</i> Sochandaling Teng
+ * @author Sochandaling Teng
  */
 public class Main extends Application {
     /**
@@ -28,7 +28,7 @@ public class Main extends Application {
     }
 
     /**
-     * This is the main method. This launches the application by making a connection to the database, then closing the connection when the program is closed.
+     * This is the main method. This launches the application by making a connection to JDBC, then closing the connection after exiting the program.
      * @param args the command line arguments passed to the application
      */
     public static void main(String[] args) {

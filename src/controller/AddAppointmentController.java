@@ -51,8 +51,6 @@ public class AddAppointmentController implements Initializable {
         LocalTime endTime = endTimeComboBox.getSelectionModel().getSelectedItem();
         LocalDateTime startDateTime = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startTime.getHour(), startTime.getMinute());
         LocalDateTime endDateTime = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endTime.getHour(), endTime.getMinute());
-//        System.out.println("LocalDateTime start: " + startDateTime);
-//        System.out.println("LocalDateTime end: " + endDateTime);
 
         if(title.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -82,14 +80,7 @@ public class AddAppointmentController implements Initializable {
             alert.showAndWait();
             return;
         }
-        else if(startDateTime.isAfter(endDateTime)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Invalid Date/Time");
-            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
-            alert.showAndWait();
-            return;
-        }
-        else if(startDateTime.isEqual(endDateTime)) {
+        else if(startDateTime.isAfter(endDateTime) || startDateTime.isEqual(endDateTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Invalid Date/Time");
             alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
@@ -100,8 +91,6 @@ public class AddAppointmentController implements Initializable {
         //Convert to EST
         ZonedDateTime estStartDateTime = startDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
         ZonedDateTime estEndDateTime = endDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
-//        System.out.println("EST start: " + estStartDateTime);
-//        System.out.println("EST end: " + estEndDateTime);
 
         //Check business day
         int startDay = estStartDateTime.getDayOfWeek().getValue();
@@ -130,21 +119,8 @@ public class AddAppointmentController implements Initializable {
             alert.showAndWait();
             return;
         }
-//        if(startDateTime.isAfter(endDateTime)) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("Invalid Date/Time");
-//            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
-//            alert.showAndWait();
-//            return;
-//        }
-//        else if(startDateTime.isEqual(endDateTime)) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText("Invalid Date/Time");
-//            alert.setContentText("The appointment \"Start Date/Time\" must be before \"End Date/Time\".");
-//            alert.showAndWait();
-//            return;
-//        }
 
+        //Check for overlapping
         for(Appointment a: AppointmentDao.getAppointmentsByCustomer(customerId)) {
             LocalDateTime existedStartDateTime = LocalDateTime.of(a.getStartDate(), a.getStartTime());
             LocalDateTime existedEndDateTime = LocalDateTime.of(a.getEndDate(), a.getEndTime());

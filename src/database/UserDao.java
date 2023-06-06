@@ -7,7 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is UserDao class.
+ */
 public class UserDao {
+    /**
+     * Gets all users from the database.
+     * @return the list of all users in database
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<User> getAllUsers() throws SQLException {
         String sql = "SELECT * FROM users";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

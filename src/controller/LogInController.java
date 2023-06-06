@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.*;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
@@ -118,7 +119,13 @@ public class LogInController implements Initializable {
     }
 
     public void onCancelButton(ActionEvent actionEvent) {
-        System.exit(0);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Exit The Application");
+        alert.setContentText("Are you sure you want to exit?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 
     @Override
