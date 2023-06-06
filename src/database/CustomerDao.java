@@ -8,7 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is CustomerDao class.
+ * This class is for getting, adding, updating and deleting data of customers in the database.
+ */
 public class CustomerDao {
+    /**
+     * Gets all customers from the database.
+     * @return the list of all customers in database
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Customer> getAllCustomers() throws SQLException {
         String sql = "SELECT * FROM customers, first_level_divisions, countries WHERE customers.Division_ID = first_level_divisions.Division_ID AND " +
                 "first_level_divisions.Country_ID = countries.Country_ID";
@@ -30,6 +39,17 @@ public class CustomerDao {
         return allCustomers;
     }
 
+    /**
+     * Adds a customer to the database.
+     * @param customerId the id of customer
+     * @param customerName the name of customer
+     * @param address the address of customer
+     * @param postalCode the postal code of customer
+     * @param phoneNumber the phone number of customer
+     * @param divisionId the id of division of customer
+     * @return
+     * @throws SQLException
+     */
     public int addCustomer(int customerId, String customerName, String address, String postalCode, String phoneNumber, int divisionId) throws SQLException {
         String sql = "INSERT INTO customers (Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID) " +
                 "VALUE (?, ?, ?, ?, ?, ?)";

@@ -7,7 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is ContactDao class.
+ * This class is for getting data of contacts from the database.
+ */
 public class ContactDao {
+    /**
+     * Gets all contacts from the database.
+     * @return the list of all contacts in database
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Contact> getAllContacts() throws SQLException {
         String sql = "SELECT * FROM contacts";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

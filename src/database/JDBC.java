@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 /**
  * This is the JDBC (Java Database Connectivity) class.
+ * This class is for connecting from the IDE to the database.
  */
 public class JDBC {
     private static final String protocol = "jdbc";

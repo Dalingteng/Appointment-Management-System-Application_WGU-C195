@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 /**
  * This is UserDao class.
+ * This class is for getting data of users from the database.
  */
 public class UserDao {
     /**

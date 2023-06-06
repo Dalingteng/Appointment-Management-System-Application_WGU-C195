@@ -7,7 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is ReportDao class.
+ * This class is for getting reports of total appointments from the database, grouped by month/type and country.
+ */
 public class ReportDao {
+    /**
+     * Gets reports of total appointments from the database, grouped by month and type.
+     * @return the list of total appointments, grouped by month and type
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Report> getReportsByMonthType() throws SQLException {
         String sql = "SELECT monthname(Start) as Month, Type, count(*) as Count FROM appointments GROUP BY monthname(Start), Type";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -22,6 +31,11 @@ public class ReportDao {
         return reportsByMonthType;
     }
 
+    /**
+     * Gets reports of total appointments from the database, grouped by country.
+     * @return the list of total appointments, grouped by country
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Report> getReportsByCountry() throws SQLException {
         String sql = "SELECT countries.Country, count(*) as Count FROM client_schedule.appointments " +
                 "INNER JOIN customers ON appointments.Customer_ID = customers.Customer_ID " +
