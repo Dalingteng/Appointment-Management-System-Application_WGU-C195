@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 /**
  * This is LogInController class.
- * This class is for the log in screen of the application
+ * This class is for the Log In Screen of the application.
  *
  * //To do: add more description
  *
@@ -74,6 +74,19 @@ public class LogInController implements Initializable {
     static ObservableList<User> Users;
 
     /**
+     * This is the log in method.
+     *
+     * This method gets input from username text field and password text field, then checks with all users in database
+     * if the user is valid. If valid, it logs in successfully and loads to the Appointment Screen. If not, it alerts an error
+     * message that username or password is invalid.
+     *
+     * After logging in successfully, it checks to see if there is any upcoming appointment within 15 minutes of
+     * the user's log in based on the local time of the user's computer. If there is any upcoming appointment, it alerts a message
+     * showing appointment id, date and time. If not, it will alert a message saying that there is no upcoming appointment within 15
+     * minutes of logging in.
+     *
+     * While attempting to log in, "login_activity.txt" is created and appended to track all log in
+     * attempts, dates, times and zone id.
      *
      * @param actionEvent the log in button action
      * @throws IOException if fxml file not found
@@ -167,6 +180,8 @@ public class LogInController implements Initializable {
     }
 
     /**
+     * This is the exit method on cancel button
+     * This method exits the application when the user confirms to exit.
      *
      * @param actionEvent the cancel button action
      */
