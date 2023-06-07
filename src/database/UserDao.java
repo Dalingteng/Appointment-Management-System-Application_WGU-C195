@@ -10,10 +10,12 @@ import java.sql.SQLException;
 /**
  * This is UserDao class.
  * This class is for getting data of users from the database.
+ *
+ * @author Sochandaling Teng
  */
 public class UserDao {
     /**
-     * This is the get all users method. This accesses the database and gets all users from the database.
+     * This is the get all users method. This gets all users from the database.
      * @return the list of all users in database
      * @throws SQLException if the database not found
      */

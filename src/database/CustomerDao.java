@@ -11,6 +11,8 @@ import java.sql.SQLException;
 /**
  * This is CustomerDao class.
  * This class is for getting, adding, updating and deleting data of customers in the database.
+ *
+ * @author Sochandaling Teng
  */
 public class CustomerDao {
     /**
@@ -40,15 +42,15 @@ public class CustomerDao {
     }
 
     /**
-     * This is the add customer method. This adds a customer to the database.
+     * This is the add customer method. This adds a customer into the database with all desired information of that customer.
      * @param customerId the id of customer
      * @param customerName the name of customer
      * @param address the address of customer
      * @param postalCode the postal code of customer
      * @param phoneNumber the phone number of customer
      * @param divisionId the id of division of customer
-     * @return
-     * @throws SQLException
+     * @return the number of rows affected in database
+     * @throws SQLException if the database not found
      */
     public int addCustomer(int customerId, String customerName, String address, String postalCode, String phoneNumber, int divisionId) throws SQLException {
         String sql = "INSERT INTO customers (Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID) " +
@@ -70,6 +72,17 @@ public class CustomerDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the update customer method. This updates information of a selected customer in the database based on customer id.
+     * @param customerId the id of customer to be updated
+     * @param customerName the name of customer
+     * @param address the address of customer
+     * @param postalCode the postal code of customer
+     * @param phoneNumber the phone number of customer
+     * @param divisionId the id of division of customer
+     * @return the number of rows affected in database
+     * @throws SQLException if the database not found
+     */
     public int updateCustomer(int customerId, String customerName, String address, String postalCode, String phoneNumber, int divisionId) throws SQLException {
         String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? " +
                 "WHERE Customer_ID = ?";
@@ -90,6 +103,13 @@ public class CustomerDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the delete customer method. This deletes a selected customer from the database based on customer id and customer name and alerts whether or not the customer is deleted.
+     * @param customerId the id of customer to be deleted
+     * @param customerName the name of customer to be deleted
+     * @return the number of rows affected in database
+     * @throws SQLException if the database not found
+     */
     public static int deleteCustomer(int customerId, String customerName) throws SQLException {
         String sql = "DELETE FROM customers WHERE Customer_ID = ? AND Customer_Name = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

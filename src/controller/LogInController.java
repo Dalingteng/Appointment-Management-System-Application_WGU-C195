@@ -23,18 +23,62 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This is LogInController class.
+ * This class is for the log in screen of the application
+ *
+ * //To do: add more description
+ *
+ * @author Sochandaling Teng
+ */
 public class LogInController implements Initializable {
+    /**
+     * the label for username
+     */
     public Label usernameLabel;
+    /**
+     * the label for password
+     */
     public Label passwordLabel;
+    /**
+     * the label for time zone
+     */
     public Label timeZoneLabel;
+    /**
+     * the label for user's system default time zone
+     */
     public Label userTimeZoneLabel;
+    /**
+     * the text field for username
+     */
     public TextField usernameTextField;
+    /**
+     * the text field for password
+     */
     public PasswordField passwordTextField;
+    /**
+     * the button to log in
+     */
     public Button logInButton;
+    /**
+     * the button to reset
+     */
     public Button resetButton;
+    /**
+     * the button to cancel
+     */
     public Button cancelButton;
+    /**
+     * the list of all users in database
+     */
     static ObservableList<User> Users;
 
+    /**
+     *
+     * @param actionEvent the log in button action
+     * @throws IOException if fxml file not found
+     * @throws SQLException if database not found
+     */
     public void onLogInButton(ActionEvent actionEvent) throws IOException, SQLException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
@@ -113,11 +157,19 @@ public class LogInController implements Initializable {
         outputFile.close();
     }
 
+    /**
+     *
+     * @param actionEvent the reset button action
+     */
     public void onResetButton(ActionEvent actionEvent) {
         usernameTextField.clear();
         passwordTextField.clear();
     }
 
+    /**
+     *
+     * @param actionEvent the cancel button action
+     */
     public void onCancelButton(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Exit The Application");
@@ -128,6 +180,12 @@ public class LogInController implements Initializable {
         }
     }
 
+    /**
+     * This is the initialize method.
+     * This initializes the controller by
+     * @param url the location used to resolve relative paths for the root object, or null if the location is not known
+     * @param resourceBundle resourceBundle the resources used to localize the root object, or null if the root object was not localized
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userTimeZoneLabel.setText(String.valueOf(ZoneId.systemDefault()));

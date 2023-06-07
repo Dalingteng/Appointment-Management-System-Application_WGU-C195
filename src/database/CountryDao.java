@@ -10,6 +10,8 @@ import java.sql.SQLException;
 /**
  * This is CountryDao class.
  * This class is for getting data of countries from the database.
+ *
+ * @author Sochandaling Teng
  */
 public class CountryDao {
     /**

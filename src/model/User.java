@@ -1,7 +1,10 @@
 package model;
 
 /**
+ * This is User model class.
  * This class is for users in database.
+ *
+ * @author Sochandaling Teng
  */
 public class User {
     /**

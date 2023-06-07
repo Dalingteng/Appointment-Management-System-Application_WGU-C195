@@ -1,7 +1,10 @@
 package model;
 
 /**
- * This class is for reports.
+ * This is Report model class.
+ * This class is for reports from database.
+ *
+ * @author Sochandaling Teng
  */
 public class Report {
     /**

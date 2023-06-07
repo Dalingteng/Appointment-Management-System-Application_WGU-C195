@@ -1,7 +1,10 @@
 package model;
 
 /**
+ * This is Customer model class.
  * This class is for customers in database.
+ *
+ * @author Sochandaling Teng
  */
 public class Customer {
     /**

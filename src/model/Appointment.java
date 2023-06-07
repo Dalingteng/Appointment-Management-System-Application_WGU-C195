@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
+ * This is Appointment model class.
  * This class is for appointments in database.
+ *
+ * @author Sochandaling Teng
  */
 public class Appointment {
     /**

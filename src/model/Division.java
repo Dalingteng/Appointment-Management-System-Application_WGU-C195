@@ -1,7 +1,10 @@
 package model;
 
 /**
+ * This is Division model class.
  * This class is for divisions in database.
+ *
+ * @author Sochandaling Teng
  */
 public class Division {
     /**

@@ -10,10 +10,12 @@ import java.sql.SQLException;
 /**
  * This is ContactDao class.
  * This class is for getting data of contacts from the database.
+ *
+ * @author Sochandaling Teng
  */
 public class ContactDao {
     /**
-     * This is the get all contacts method. This accesses the database and gets all contacts from the database.
+     * This is the get all contacts method. This gets all contacts from the database.
      * @return the list of all contacts in database
      * @throws SQLException if the database not found
      */

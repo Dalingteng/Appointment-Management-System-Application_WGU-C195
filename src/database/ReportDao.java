@@ -10,6 +10,8 @@ import java.sql.SQLException;
 /**
  * This is ReportDao class.
  * This class is for getting reports of total appointments from the database, grouped by month/type and country.
+ *
+ * @author Sochandaling Teng
  */
 public class ReportDao {
     /**

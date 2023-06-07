@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * This is the JDBC (Java Database Connectivity) class.
+ * This is JDBC (Java Database Connectivity) class.
  * This class is for connecting from the IDE to the database.
+ *
+ * @author Sochandaling Teng
  */
 public class JDBC {
     private static final String protocol = "jdbc";

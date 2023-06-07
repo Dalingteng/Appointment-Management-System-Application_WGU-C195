@@ -12,7 +12,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * This is AppointmentDao class.
+ * This class is for getting, adding, updating and deleting data of appointments in the database.
+ *
+ * @author Sochandaling Teng
+ */
 public class AppointmentDao {
+    /**
+     * This is the get all appointments method. This gets all appointments from the database.
+     * @return the list of all appointments in database
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
         String sql = "SELECT * FROM appointments";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -38,6 +49,12 @@ public class AppointmentDao {
         return allAppointments;
     }
 
+    /**
+     * This is the get appointment by customer method. This gets appointments of a specific customer from the database based on customer id.
+     * @param customerId the id of a specific customer
+     * @return the list of appointments of a specific customer
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Appointment> getAppointmentsByCustomer(int customerId) throws SQLException {
         String sql = "SELECT * FROM appointments WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -64,6 +81,12 @@ public class AppointmentDao {
         return appointmentsByCustomer;
     }
 
+    /**
+     * This is the get appointment by contact method. This gets appointments of a specific contact from the database based on contact id.
+     * @param contactId the id of a specific contact
+     * @return the list of appointments of a specific contact
+     * @throws SQLException if the database not found
+     */
     public static ObservableList<Appointment> getAppointmentsByContact(int contactId) throws SQLException {
         String sql = "SELECT * FROM appointments WHERE Contact_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -90,6 +113,21 @@ public class AppointmentDao {
         return appointmentsByContact;
     }
 
+    /**
+     * This is the add appointment method. This adds an appointment into the database with all desired information of that appointment.
+     * @param appointmentId the id of appointment
+     * @param title the title of appointment
+     * @param description the description of appointment
+     * @param location the location of appointment
+     * @param type the type of appointment
+     * @param startDateTime the start date and time of appointment
+     * @param endDateTime the end date and time of appointment
+     * @param customerId the id of customer for appointment
+     * @param userId the id of user for appointment
+     * @param contactId the id of contact for appointment
+     * @return the number of rows affected in database
+     * @throws SQLException if the database not found
+     */
     public int addAppointment(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int customerId, int userId, int contactId) throws SQLException {
         String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) " +
                 "VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -114,6 +152,21 @@ public class AppointmentDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the update appointment method. This updates information of a selected appointment in the database based on appointment id.
+     * @param appointmentId the id of appointment to be updated
+     * @param title the title of appointment
+     * @param description the description of appointment
+     * @param location the location of appointment
+     * @param type the type of appointment
+     * @param startDateTime the start date and time of appointment
+     * @param endDateTime the end date and time of appointment
+     * @param customerId the id of customer for appointment
+     * @param userId the id of user for appointment
+     * @param contactId the id of contact for appointment
+     * @return the number of rows affected in database
+     * @throws SQLException if the database not found
+     */
     public int updateAppointment(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int customerId, int userId, int contactId) throws SQLException {
         String sql = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ? , Contact_ID = ? " +
                 "WHERE Appointment_ID = ?";
@@ -138,6 +191,13 @@ public class AppointmentDao {
         return rowsAffected;
     }
 
+    /**
+     * This is the delete appointment method. This deletes a selected appointment from the database based on appointment id and type and alerts whether or not the appointment is deleted.
+     * @param appointmentId the id of appointment to be deleted
+     * @param type the type of appointment to be deleted
+     * @return the number of rows affected in database
+     * @throws SQLException if the database not found
+     */
     public static int deleteAppointment(int appointmentId, String type) throws SQLException {
         String sql = "DELETE FROM appointments WHERE Appointment_ID = ? AND Type = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

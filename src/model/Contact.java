@@ -1,7 +1,10 @@
 package model;
 
 /**
+ * This is Contact model class.
  * This class is for contacts in database.
+ *
+ * @author Sochandaling Teng
  */
 public class Contact {
     /**

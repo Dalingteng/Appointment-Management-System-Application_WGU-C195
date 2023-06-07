@@ -1,7 +1,10 @@
 package model;
 
 /**
+ * This is Country model class.
  * This class is for countries in database.
+ *
+ * @author Sochandaling Teng
  */
 public class Country {
     /**

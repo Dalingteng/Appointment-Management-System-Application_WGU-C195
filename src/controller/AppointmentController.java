@@ -133,12 +133,12 @@ public class AppointmentController implements Initializable {
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 
         if(selectedAppointment != null) {
+            int appointmentId = selectedAppointment.getAppointmentId();
+            String type = selectedAppointment.getType();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Delete Confirmation");
             alert.setContentText("Are you sure you want to delete?");
             Optional<ButtonType> result = alert.showAndWait();
-            int appointmentId = selectedAppointment.getAppointmentId();
-            String type = selectedAppointment.getType();
             if(result.isPresent() && result.get() == ButtonType.OK) {
                 AppointmentDao.deleteAppointment(appointmentId, type);
                 appointmentTable.setItems(AppointmentDao.getAllAppointments());

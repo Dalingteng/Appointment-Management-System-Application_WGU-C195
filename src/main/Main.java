@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 import database.JDBC;
 
 /**
- * This is the main class of Appointment Management System.
+ * This is Main class of Appointment Management System.
+ * This class connects to database and launches the application.
  *
  * @author Sochandaling Teng
  */

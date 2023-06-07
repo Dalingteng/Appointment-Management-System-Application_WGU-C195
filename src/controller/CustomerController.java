@@ -82,12 +82,12 @@ public class CustomerController implements Initializable {
         Customer selectedCustomer = customerTable.getSelectionModel().getSelectedItem();
 
         if(selectedCustomer != null) {
+            int customerId = selectedCustomer.getCustomerId();
+            String customerName = selectedCustomer.getCustomerName();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Delete Confirmation");
             alert.setContentText("Are you sure you want to delete?");
             Optional<ButtonType> result = alert.showAndWait();
-            int customerId = selectedCustomer.getCustomerId();
-            String customerName = selectedCustomer.getCustomerName();
             if(!AppointmentDao.getAppointmentsByCustomer(customerId).isEmpty()) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Unable to Delete Customer");

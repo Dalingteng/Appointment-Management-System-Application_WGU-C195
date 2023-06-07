@@ -10,6 +10,8 @@ import java.sql.SQLException;
 /**
  * This is DivisionDao class.
  * This class is for getting data of divisions from the database.
+ *
+ * @author Sochandaling Teng
  */
 public class DivisionDao {
     /**
