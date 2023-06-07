@@ -1,6 +1,7 @@
 package controller;
 
 import database.AppointmentDao;
+import database.JDBC;
 import database.UserDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,8 +27,6 @@ import java.util.ResourceBundle;
 /**
  * This is LogInController class.
  * This class is for the Log In Screen of the application.
- *
- * //To do: add more description
  *
  * @author Sochandaling Teng
  */
@@ -57,15 +56,15 @@ public class LogInController implements Initializable {
      */
     public PasswordField passwordTextField;
     /**
-     * the button to log in
+     * the button for logging in
      */
     public Button logInButton;
     /**
-     * the button to reset
+     * the button for resetting
      */
     public Button resetButton;
     /**
-     * the button to cancel
+     * the button for cancelling/exiting
      */
     public Button cancelButton;
     /**
@@ -74,19 +73,18 @@ public class LogInController implements Initializable {
     static ObservableList<User> Users;
 
     /**
-     * This is the log in method.
+     * <p>This is the log in method. This method gets input from username text field and password text field to check whether
+     * the user is valid when the user clicks on log in button. If valid, it logs in successfully and loads to the Appointment Screen.
+     * If not, it displays an error message if username or password is invalid.</p>
      *
-     * This method gets input from username text field and password text field, then checks with all users in database
-     * if the user is valid. If valid, it logs in successfully and loads to the Appointment Screen. If not, it alerts an error
-     * message that username or password is invalid.
-     *
-     * After logging in successfully, it checks to see if there is any upcoming appointment within 15 minutes of
-     * the user's log in based on the local time of the user's computer. If there is any upcoming appointment, it alerts a message
+     * <p>After logging in successfully, it checks to see if there is any upcoming appointment within 15 minutes of
+     * logging in based on the local time of the user's computer. If there is any upcoming appointment, it alerts a message
      * showing appointment id, date and time. If not, it will alert a message saying that there is no upcoming appointment within 15
-     * minutes of logging in.
+     * minutes of logging in.</p>
      *
-     * While attempting to log in, "login_activity.txt" is created and appended to track all log in
-     * attempts, dates, times and zone id.
+     * <p>If the user's computer language is french, the Log In Screen is displayed in french language including the error message
+     * alerting invalid username or password. Also, while attempting to log in, "login_activity.txt" is created and appended at each
+     * attempt to track all log in attempts, dates, times and zone id.</p>
      *
      * @param actionEvent the log in button action
      * @throws IOException if fxml file not found
@@ -100,7 +98,7 @@ public class LogInController implements Initializable {
         FileWriter fileWriter = new FileWriter("login_activity.txt", true);
         PrintWriter outputFile = new PrintWriter(fileWriter);
 
-        for(User u: Users) {
+        for(User u: UserDao.getAllUsers()) {
             if(u.getUserName().equals(username) && u.getPassword().equals(password)) {
                 validUser = true;
                 User user = new User(u.getUserId(), username, password);
@@ -171,6 +169,8 @@ public class LogInController implements Initializable {
     }
 
     /**
+     * This is the reset method.
+     * This method clears username text field and password text field when the user clicks on reset button.
      *
      * @param actionEvent the reset button action
      */
@@ -180,8 +180,8 @@ public class LogInController implements Initializable {
     }
 
     /**
-     * This is the exit method on cancel button
-     * This method exits the application when the user confirms to exit.
+     * This is the cancel method.
+     * This method exits the application when the user clicks on cancel button and confirms to exit.
      *
      * @param actionEvent the cancel button action
      */
@@ -196,8 +196,13 @@ public class LogInController implements Initializable {
     }
 
     /**
-     * This is the initialize method.
-     * This initializes the controller by
+     * <p>This is the initialize method. This method initializes the log in controller by displaying the user's time zone label based on
+     * the user's location and making connection to the database.</p>
+     *
+     * <p>If the user's computer language setting is english, the Log In Screen is displayed in english, but if the user's
+     * computer language setting is french, the Log In Screen is displayed in french by getting resource bundle of french language
+     * from the language package.</p>
+     *
      * @param url the location used to resolve relative paths for the root object, or null if the location is not known
      * @param resourceBundle resourceBundle the resources used to localize the root object, or null if the root object was not localized
      */
@@ -206,7 +211,7 @@ public class LogInController implements Initializable {
         userTimeZoneLabel.setText(String.valueOf(ZoneId.systemDefault()));
 
         try {
-            Users = UserDao.getAllUsers();
+            JDBC.makeConnection();
             if (Locale.getDefault().getLanguage().equals("fr")) {
                 ResourceBundle rb = ResourceBundle.getBundle("language/language_fr", Locale.getDefault());
                 usernameLabel.setText(rb.getString("Username"));
