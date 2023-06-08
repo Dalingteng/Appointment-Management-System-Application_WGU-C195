@@ -17,18 +17,62 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This is ModifyCustomerController class.
+ * This class is for the Modify Customer Screen of the application.
+ *
+ * @author Sochandaling Teng
+ */
 public class ModifyCustomerController implements Initializable {
+    /**
+     * the text field for customer id
+     */
     public TextField customerIdTextField;
+    /**
+     * the text field for customer name
+     */
     public TextField customerNameTextField;
+    /**
+     * the text field for address
+     */
     public TextField addressTextField;
+    /**
+     * the text field for postal code
+     */
     public TextField postalCodeTextField;
+    /**
+     * the text field for phone number
+     */
     public TextField phoneNumberTextField;
+    /**
+     * the combo box for selecting country
+     */
     public ComboBox<Country> countryComboBox;
+    /**
+     * the combo box for selecting division
+     */
     public ComboBox<Division> divisionComboBox;
+    /**
+     * the button for saving modifying customer
+     */
     public Button saveButton;
+    /**
+     * the button for cancelling modifying customer
+     */
     public Button cancelButton;
+    /**
+     * the customer selected from Main Customer Screen
+     */
     private Customer passSelectedCustomer;
 
+    /**
+     * This is the pass customer method.
+     * This method retrieves information of the customer selected from the Main Customer Screen to the Modify Customer Screen.
+     * LAMBDA Expression:
+     *
+     * @param selectedCustomer the customer selected from Main Customer Screen
+     * @throws SQLException if database not found
+     */
     public void passCustomer(Customer selectedCustomer) throws SQLException {
         JDBC.makeConnection();
         passSelectedCustomer = selectedCustomer;
@@ -48,26 +92,35 @@ public class ModifyCustomerController implements Initializable {
                 divisionComboBox.setValue(division);
             }
         });
-//        for(Country c: countryComboBox.getItems()) {
-//            if(c.getCountryId() == selectedCustomer.getCountryId()) {
-//                countryComboBox.setValue(c);
-//                break;
-//            }
-//        }
-//        for(Division d: divisionComboBox.getItems()) {
-//            if(d.getDivisionId() == selectedCustomer.getDivisionId()) {
-//                divisionComboBox.setValue(d);
-//                break;
-//            }
-//        }
     }
 
+    /**
+     * This is the country combo box method.
+     * This method gets the id of selected country, then calls the get divisions by country method from DivisionDao class of
+     * selected country to populate division combo box and pre-select the first division on the list.
+     *
+     * @param actionEvent the country combo box action
+     * @throws SQLException if database not found
+     */
     public void onCountryComboBox(ActionEvent actionEvent) throws SQLException {
         int countryId = countryComboBox.getValue().getCountryId();
         divisionComboBox.setItems(DivisionDao.getDivisionsByCountry(countryId));
         divisionComboBox.getSelectionModel().selectFirst();
     }
 
+    /**
+     * <p>This is the save modifying customer method.
+     * This method updates the selected customer to the database with all modified information of all text fields and combo boxes
+     * by checking the validation whether or not text fields is empty.</p>
+     *
+     * <p>If none of text fields is empty, it calls the update customer method from CustomerDao class to update the customer to
+     * the database, then the customer table in the Main Customer Screen repopulates. Otherwise, if any text field is empty,
+     * it alerts an error message to fill out that text field.</p>
+     *
+     * @param actionEvent the save button action
+     * @throws SQLException if database not found
+     * @throws IOException if fxml file not found
+     */
     public void onSaveButton(ActionEvent actionEvent) throws SQLException, IOException {
         int customerId = passSelectedCustomer.getCustomerId();
         String customerName = customerNameTextField.getText();
@@ -122,6 +175,14 @@ public class ModifyCustomerController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the cancel modifying method.
+     * This method cancels modifying customer when the user clicks on cancel button and confirms to cancel, then shifts back to
+     * the Main Customer Screen of the application.
+     *
+     * @param actionEvent the cancel button action
+     * @throws IOException if fxml file not found
+     */
     public void onCancelButton(ActionEvent actionEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Cancel Confirmation");
@@ -135,6 +196,14 @@ public class ModifyCustomerController implements Initializable {
         }
     }
 
+    /**
+     * This is the initialize method.
+     * This method initializes the modify customer controller by making connection to the database, then calling the get all countries
+     * method from CountryDao class to populate country combo box.
+     *
+     * @param url the location used to resolve relative paths for the root object, or null if the location is not known
+     * @param resourceBundle resourceBundle the resources used to localize the root object, or null if the root object was not localized
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

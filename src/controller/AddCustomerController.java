@@ -83,8 +83,13 @@ public class AddCustomerController implements Initializable {
     }
 
     /**
-     * This is the save adding customer method.
-     * This method
+     * <p>This is the save adding customer method.
+     * This method adds a customer to the database by getting input from the user of all text fields and combo boxes and
+     * checking the validation whether or not text fields is empty.</p>
+     *
+     * <p>If none of text fields is empty, it calls the add customer method from CustomerDao class to add to the database,
+     * then the customer table in the Main Customer Screen repopulates. Otherwise, if any text field is empty, it alerts an error
+     * message to fill out that text field.</p>
      *
      * @param actionEvent the save button action
      * @throws SQLException if database not found
@@ -146,7 +151,7 @@ public class AddCustomerController implements Initializable {
     /**
      * This is the cancel adding customer method.
      * This method cancels adding customer when the user clicks on cancel button and confirms to cancel, then shifts back to
-     * Customer Screen of the application.
+     * the Main Customer Screen of the application.
      *
      * @param actionEvent the cancel button action
      * @throws IOException if fxml file not found
