@@ -123,9 +123,9 @@ public class CustomerController implements Initializable {
     }
 
     /**
-     * This is the modify customer method.
-     * This method loads the Modify Customer Screen when the user clicks on modify customer button.
-     * It retrieves the information of the selected customer and displays an error message if no customer is selected.
+     * This is the modify customer method. This method loads the Modify Customer Screen when the user clicks on modify customer button.
+     * It retrieves the information of the selected customer by calling the pass customer method from ModifyCustomerController
+     * and displays an error message if no customer is selected.
      *
      * @param actionEvent the modify customer button action
      * @throws IOException if fxml file not found
@@ -152,7 +152,7 @@ public class CustomerController implements Initializable {
     }
 
     /**
-     * This is the delete method.
+     * This is the delete customer method.
      * This method deletes a selected customer when the user clicks on delete customer button and confirms to delete.
      * It prevents the user to delete the customer that has associated appointments and displays an error message if
      * no customer is selected or if the customer has associated appointments.
@@ -194,8 +194,8 @@ public class CustomerController implements Initializable {
 
     /**
      * This is the initialize method.
-     * This method initializes the customer controller by assigning values to all columns, then making connection to the database and
-     * calling the get all customers method from CustomerDao class to populate the customer table based on the values of all columns.
+     * This method initializes the customer controller by making connection to the database and populates the customer table by
+     * calling the get all customers method from CustomerDao class.
      *
      * @param url the location used to resolve relative paths for the root object, or null if the location is not known
      * @param resourceBundle resourceBundle the resources used to localize the root object, or null if the root object was not localized

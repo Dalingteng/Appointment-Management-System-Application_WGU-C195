@@ -164,7 +164,10 @@ public class ReportController implements Initializable {
 
     /**
      * This is the initialize method.
-     * This method
+     * This method initializes the report controller by making connection to the database and populates the tables of all reports.
+     * It calls the get all appointments from AppointmentDao class to populate report by contact table, calls the get reports by month
+     * and type from ReportDao class to populate report by month and type table and calls the get reports by country from ReportDao class
+     * to populate report by country table.
      *
      * @param url the location used to resolve relative paths for the root object, or null if the location is not known
      * @param resourceBundle resourceBundle the resources used to localize the root object, or null if the root object was not localized

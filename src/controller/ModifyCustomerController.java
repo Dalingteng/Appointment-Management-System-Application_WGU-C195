@@ -111,7 +111,7 @@ public class ModifyCustomerController implements Initializable {
     /**
      * <p>This is the save modifying customer method.
      * This method updates the selected customer to the database with all modified information of all text fields and combo boxes
-     * by checking the validation whether or not text fields is empty.</p>
+     * except customer id and checking the validation whether or not text fields is empty.</p>
      *
      * <p>If none of text fields is empty, it calls the update customer method from CustomerDao class to update the customer to
      * the database, then the customer table in the Main Customer Screen repopulates. Otherwise, if any text field is empty,
@@ -177,7 +177,7 @@ public class ModifyCustomerController implements Initializable {
 
     /**
      * This is the cancel modifying method.
-     * This method cancels modifying customer when the user clicks on cancel button and confirms to cancel, then shifts back to
+     * This method cancels modifying customer when the user clicks on cancel button and confirms to cancel, then switches back to
      * the Main Customer Screen of the application.
      *
      * @param actionEvent the cancel button action
