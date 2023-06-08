@@ -125,8 +125,10 @@ public class AppointmentController implements Initializable {
 
     /**
      * This is the week radio button method.
-     * This method
-     * LAMBDA Expression:
+     * This method populates the report by contact table by filtering all appointments in the database, then using lambda expression
+     * to add appointments that occur within a week from the date of log in to the filtered list in order to populate the table.<br>
+     *
+     * <i>Lambda expression:</i> to append the filtered list of appointments within a week from the date of log in.
      *
      * @param actionEvent the week radio button action
      * @throws SQLException if database not found
@@ -145,8 +147,10 @@ public class AppointmentController implements Initializable {
 
     /**
      * This is the month radio button method.
-     * This method
-     * LAMBDA Expression:
+     * This method populates the report by contact table by filtering all appointments in the database, then using lambda expression
+     * to add appointments that occur within a month to the filtered list in order to populate the table.<br>
+     *
+     * <i>Lambda expression:</i> to append the filtered list of appointments within a month from the date of log in.
      *
      * @param actionEvent the month radio button action
      * @throws SQLException if database not found

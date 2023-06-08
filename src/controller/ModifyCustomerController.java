@@ -67,8 +67,10 @@ public class ModifyCustomerController implements Initializable {
 
     /**
      * This is the pass customer method.
-     * This method retrieves information of the customer selected from the Main Customer Screen to the Modify Customer Screen.
-     * LAMBDA Expression:
+     * This method retrieves information of the customer selected from the Main Customer Screen to the Modify Customer Screen.<br>
+     *
+     * <i>Lambda Expression:</i> to iterate through the country combo box and the division combo box, then set value of combo boxes
+     * based on information of the selected customer.
      *
      * @param selectedCustomer the customer selected from Main Customer Screen
      * @throws SQLException if database not found

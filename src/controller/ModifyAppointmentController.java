@@ -88,8 +88,10 @@ public class ModifyAppointmentController implements Initializable {
 
     /**
      * This is the pass appointment method.
-     * This method retrieves information of the appointment selected from the Main Appointment Screen to the Modify Appointment Screen.
-     * LAMBDA Expression:
+     * This method retrieves information of the appointment selected from the Main Appointment Screen to the Modify Appointment Screen.<br>
+     *
+     * <i>Lambda Expression:</i> to iterate through the contact id combo box, the customer id combo box and the user id combo box,
+     * then set value of combo boxes based on information of the selected appointment.
      *
      * @param selectedAppointment the appointment selected from Main Appointment Screen
      * @throws SQLException if database not found
