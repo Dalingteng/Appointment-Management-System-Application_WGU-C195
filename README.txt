@@ -18,8 +18,8 @@ MYSQL CONNECTOR DRIVER VERSION NUMBER: mysql-connector-java-8.0.25
 
 DIRECTIONS:
 As the program is launched, the user is required to enter username and password in the Log In Screen.
-If the username and password are correct, the user is logged in successfully and is alerted any upcoming appointments
-within 15 minutes from logging in before navigating to Main Appointment Screen.
+If the username and password are correct, the user is logged in successfully and is alerted any upcoming
+appointments within 15 minutes from logging in before navigating to Main Appointment Screen.
 
 From the Main Appointment Screen, the user can view appointments by week or month or view all appointments. Also,
 the user can manage the appointments by adding, modifying and deleting appointments. If the user adds appointment,
