@@ -172,7 +172,7 @@ public class AddAppointmentController implements Initializable {
             return;
         }
 
-        //Check for overlapping
+        //Check overlapping appointments
         for(Appointment a: AppointmentDao.getAppointmentsByCustomer(customerId)) {
             LocalDateTime existedStartDateTime = LocalDateTime.of(a.getStartDate(), a.getStartTime());
             LocalDateTime existedEndDateTime = LocalDateTime.of(a.getEndDate(), a.getEndTime());
