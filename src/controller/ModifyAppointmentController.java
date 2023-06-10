@@ -134,10 +134,10 @@ public class ModifyAppointmentController implements Initializable {
      *
      * <p>If any text field is empty or start date/time is the same or after end date/time, it alerts an error message to fill out that
      * text field or modify start/end date and time. Otherwise, if there is no input error, it checks to see if the appointment date and
-     * time is within business operation which is Monday to Friday from 08:00 to 22:00 EST and alerts an error message if the appointment
-     * date and time is outside of business operation. Then, it checks to see if the appointment overlaps with any existed appointment
-     * of the same customer by calling the get appointments by customer method from AppointmentDao class and alerts an error message if
-     * the appointment is overlapping.</p>
+     * time is within business hours which is from 08:00 to 22:00 EST and alerts an error message if the appointment date and time is
+     * outside of business operation. Then, it checks to see if the appointment overlaps with any existed appointment of the same customer
+     * by calling the get appointments by customer method from AppointmentDao class and alerts an error message if the appointment is
+     * overlapping.</p>
      *
      * <p>After validating all inputs and checking logical errors, it calls the update appointment method from AppointmentDao class to
      * update the appointment to the database, then loads to the Main Appointment Screen and the appointment table repopulates.</p>
@@ -202,19 +202,6 @@ public class ModifyAppointmentController implements Initializable {
         ZonedDateTime estStartDateTime = startDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
         ZonedDateTime estEndDateTime = endDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("US/Eastern"));
 
-        //Check business day
-        int startDay = estStartDateTime.getDayOfWeek().getValue();
-        int endDay = estEndDateTime.getDayOfWeek().getValue();
-        int monday = DayOfWeek.MONDAY.getValue();
-        int friday = DayOfWeek.FRIDAY.getValue();
-        if(startDay < monday || startDay > friday || endDay < monday || endDay > friday) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Business Not In Operation");
-            alert.setContentText("The appointment day is outside of business operations (Monday-Friday between 08:00 and 22:00 EST).");
-            alert.showAndWait();
-            return;
-        }
-
         //Check business hours
         LocalTime appointmentStartTime = estStartDateTime.toLocalTime();
         LocalTime appointmentEndTime = estEndDateTime.toLocalTime();
@@ -223,7 +210,7 @@ public class ModifyAppointmentController implements Initializable {
         if(appointmentStartTime.isBefore(businessStartTime) || appointmentStartTime.isAfter(businessEndTime) || appointmentEndTime.isBefore(businessStartTime) || appointmentEndTime.isAfter(businessEndTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Business Not In Operation");
-            alert.setContentText("The appointment time [" + appointmentStartTime + "-" + appointmentEndTime + " EST] is outside of business operations (Monday-Friday between 08:00 and 22:00 EST).");
+            alert.setContentText("The appointment time [" + appointmentStartTime + "-" + appointmentEndTime + " EST] is outside of business hours (from 08:00 to 22:00 EST).");
             alert.showAndWait();
             return;
         }
